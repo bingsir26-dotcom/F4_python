@@ -16,12 +16,7 @@ export default defineConfig({
   themeConfig: {
     logo: '/images/python-spark.svg',
     siteTitle: 'F4 Python 課程',
-    nav: [
-      { text: '課程首頁', link: '/' },
-      { text: '從第 0 課開始', link: '/00_為什麼學Python' },
-      { text: 'Python 基礎', link: '/01_Python介紹與變數' },
-      { text: '資料分析', link: '/10_NumPy入門' }
-    ],
+
     sidebar: [
       {
         text: '起步：先知道自己為何而學',
@@ -80,5 +75,3 @@ export default defineConfig({
     }
   }
 })
-
-

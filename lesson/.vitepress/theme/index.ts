@@ -1,4 +1,4 @@
-import DefaultTheme from 'vitepress/theme'
+import ClassroomLayout from './ClassroomLayout'
 import './style.css'
 
-export default DefaultTheme
+export default ClassroomLayout

@@ -196,3 +196,111 @@ body {
   .VPContent, .VPDoc { padding: 0 !important; }
   .vp-doc { max-width: none !important; font-size: 17px; }
 }
+
+/* Projection mode: one control, then the teaching content gets the whole screen. */
+.classroom-controls {
+  position: fixed;
+  top: 14px;
+  right: 18px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.classroom-controls__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: .42rem;
+  min-height: 36px;
+  padding: .42rem .76rem;
+  border: 1px solid rgba(12, 92, 98, .28);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .88);
+  color: #0c5c62;
+  box-shadow: 0 5px 15px rgba(15, 118, 110, .12);
+  font-family: var(--vp-font-family-base);
+  font-size: .82rem;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+
+.classroom-controls__toggle:hover {
+  transform: translateY(-1px);
+  background: #f0fdfa;
+  box-shadow: 0 8px 19px rgba(15, 118, 110, .18);
+}
+
+.classroom-controls__toggle:focus-visible {
+  outline: 3px solid #f3c045;
+  outline-offset: 3px;
+}
+
+.classroom-controls__hint {
+  padding: .42rem .7rem;
+  border-radius: 999px;
+  background: rgba(12, 92, 98, .94);
+  color: #fff;
+  font-size: .78rem;
+  box-shadow: 0 5px 15px rgba(15, 118, 110, .18);
+}
+
+.dark .classroom-controls__toggle {
+  border-color: rgba(131, 211, 189, .35);
+  background: rgba(18, 38, 43, .88);
+  color: #b7f0db;
+}
+
+/* In classroom mode, documentation chrome disappears but the floating button remains. */
+html.classroom-mode .VPNav,
+html.classroom-mode .VPLocalNav,
+html.classroom-mode .VPSidebar,
+html.classroom-mode .VPDocAside,
+html.classroom-mode .VPDoc .aside {
+  display: none !important;
+}
+
+html.classroom-mode .VPContent,
+html.classroom-mode .VPContent.has-sidebar {
+  margin: 0 !important;
+  padding-top: 0 !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+@media (min-width: 960px) {
+  html.classroom-mode .VPDoc {
+    padding-top: 54px;
+  }
+
+  html.classroom-mode .VPDoc .content {
+    margin: 0 auto;
+    max-width: 1060px;
+  }
+
+  html.classroom-mode .VPDoc.has-aside .content-container,
+  html.classroom-mode .VPDoc .content-container {
+    max-width: 940px;
+  }
+}
+
+@media (max-width: 640px) {
+  .classroom-controls {
+    top: 9px;
+    right: 10px;
+  }
+
+  .classroom-controls__hint {
+    display: none;
+  }
+}
+
+.VPHomeHero .image {
+  filter: drop-shadow(0 20px 34px rgba(12, 92, 98, .16));
+}
+
+.VPHomeHero .image img {
+  border-radius: 22px;
+}
