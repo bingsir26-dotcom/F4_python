@@ -1,0 +1,8 @@
+/node_modules/
+/.vitepress/
+/lesson/.vitepress/cache/
+/lesson/.vitepress/dist/
+/python.docx
+*.log
+.DS_Store
+/preview-home.png

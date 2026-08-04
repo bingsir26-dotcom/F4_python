@@ -1,0 +1,14 @@
+{
+  "name": "f4-python-course",
+  "private": true,
+  "version": "1.0.0",
+  "description": "F4 Python course materials and teaching site",
+  "scripts": {
+    "docs:dev": "vitepress dev lesson",
+    "docs:build": "vitepress build lesson",
+    "docs:preview": "vitepress preview lesson"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}
