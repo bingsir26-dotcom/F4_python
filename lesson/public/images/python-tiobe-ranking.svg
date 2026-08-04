@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="670" viewBox="0 0 1200 670" role="img" aria-labelledby="title desc">
+  <title id="title">Python 在 TIOBE Index 的排名里程碑</title>
+  <desc id="desc">TIOBE 的 Python 語言頁顯示，Python 自 2001 年以來的最低名次為 2003 年 2 月的第十三名，歷史最高名次為 2026 年 7 月的第一名。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8f4e8"/>
+      <stop offset="1" stop-color="#eaf4ed"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#0b4949" flood-opacity=".13"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="670" fill="url(#bg)"/>
+  <path d="M0 78 H1200 M0 595 H1200" stroke="#0d7065" stroke-opacity=".12"/>
+  <g fill="#0d7065" font-family="ui-monospace, Consolas, monospace" font-size="19" font-weight="700" letter-spacing="3">
+    <text x="74" y="85">TIOBE INDEX · PYTHON</text>
+    <text x="74" y="624" fill-opacity=".72" font-size="14" letter-spacing="1.4">RANKING MILESTONES — SMALLER NUMBER IS BETTER</text>
+  </g>
+  <text x="74" y="152" fill="#173c3b" font-family="Georgia, 'Times New Roman', serif" font-size="48" font-weight="700">Python has reached the top.</text>
+  <text x="76" y="188" fill="#536562" font-family="ui-sans-serif, system-ui, sans-serif" font-size="20">TIOBE records its highest position since 2001 as #1 in July 2026.</text>
+
+  <g transform="translate(92 248)">
+    <line x1="70" y1="30" x2="70" y2="260" stroke="#8db3a7" stroke-width="2"/>
+    <g fill="#758b85" font-family="ui-monospace, Consolas, monospace" font-size="15">
+      <text x="0" y="39">#1</text>
+      <text x="0" y="132">#7</text>
+      <text x="-9" y="255">#13</text>
+    </g>
+    <g stroke="#b9cec5" stroke-width="1" stroke-dasharray="4 7">
+      <line x1="70" y1="32" x2="1010" y2="32"/>
+      <line x1="70" y1="125" x2="1010" y2="125"/>
+      <line x1="70" y1="250" x2="1010" y2="250"/>
+    </g>
+    <path d="M162 246 L835 34" fill="none" stroke="#e2a035" stroke-width="8" stroke-linecap="round" stroke-dasharray="1 15"/>
+    <path d="M162 246 L835 34" fill="none" stroke="#0f766e" stroke-width="3" stroke-linecap="round"/>
+
+    <g filter="url(#shadow)">
+      <circle cx="162" cy="246" r="24" fill="#fffaf0" stroke="#d88b22" stroke-width="7"/>
+      <circle cx="835" cy="34" r="34" fill="#0f766e" stroke="#fffaf0" stroke-width="8"/>
+    </g>
+    <g font-family="ui-sans-serif, system-ui, sans-serif">
+      <text x="104" y="306" fill="#765729" font-size="20" font-weight="700">Feb 2003</text>
+      <text x="104" y="334" fill="#536562" font-size="18">lowest: #13</text>
+      <text x="873" y="15" fill="#0d7065" font-size="22" font-weight="800">Jul 2026</text>
+      <text x="873" y="46" fill="#173c3b" font-size="29" font-weight="800">highest: #1</text>
+    </g>
+  </g>
+
+  <g transform="translate(780 487)">
+    <rect width="332" height="76" rx="12" fill="#fffdf6" stroke="#d5ddd6"/>
+    <text x="20" y="31" fill="#a36810" font-family="ui-monospace, Consolas, monospace" font-size="13" font-weight="700" letter-spacing="1.2">SOURCE</text>
+    <text x="20" y="57" fill="#375451" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16">TIOBE Python page · checked Aug 2026</text>
+  </g>
+  <text x="76" y="578" fill="#7c8884" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15">The connecting line only links two published milestones; it is not a month-by-month trend line.</text>
+</svg>
