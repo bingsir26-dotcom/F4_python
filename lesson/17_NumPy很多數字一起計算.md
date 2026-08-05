@@ -1,4 +1,4 @@
-# 第 16 課：NumPy——很多數字一起計算
+# 第 17 課：NumPy——很多數字一起計算
 
 > **本課主題：當資料是一大串數字時，讓 Python 一次處理整組資料。**
 >
@@ -23,14 +23,21 @@ new_gold = [gold[0] + 5, gold[1] + 5, gold[2] + 5]
 
 ### 先猜一猜
 
-你覺得下列兩行輸出會一樣嗎？
+先看這兩段**都可直接執行**的程式。你猜結果有甚麼分別？
 
 ```python
-[10, 20, 30] + [5]
-np.array([10, 20, 30]) + 5
+gold = [10, 20, 30]
+print(gold + [5])
 ```
 
-不一樣。List 的 `+` 常用來接合清單；NumPy array 的 `+ 5` 會把每個數字都加 5。
+```python
+import numpy as np
+
+gold = np.array([10, 20, 30])
+print(gold + 5)
+```
+
+第一段 List 的 `+` 是把另一個 List 接到最後，輸出 `[10, 20, 30, 5]`；第二段 NumPy array 的 `+ 5` 才會把每個數字都加 5，輸出 `[15 25 35]`。
 
 ## 新概念
 
@@ -58,7 +65,9 @@ scores >= 60
 
 pandas 適合處理有欄位名稱的表格；NumPy 適合處理很多數字。日後機器學習模型會把大量數字變成陣列來計算，所以 NumPy 是一個重要基礎。
 
-![NumPy array 對整組數字進行相同運算](/images/lesson-16-numpy-array.svg)
+NumPy **不是 AI 本身**；它是處理數字的基礎工具之一，日後很多 AI 程式會用到相似的數字陣列概念。
+
+![NumPy array 對整組數字進行相同運算](/images/lesson-17-numpy-array.svg)
 
 ## 跟著做：例子 1——替所有分數加 5 分
 

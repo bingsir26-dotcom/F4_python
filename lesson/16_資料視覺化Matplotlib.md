@@ -1,4 +1,4 @@
-# 第 15 課：資料視覺化——用圖表說故事
+# 第 16 課：資料視覺化——用圖表說故事
 
 > **本課主題：選對圖表，讓別人一眼看見資料想說的事。**
 >
@@ -63,7 +63,7 @@ plt.show()
 - x 軸和 y 軸代表甚麼；
 - 與問題相符的圖表種類。
 
-![三種圖表和它們適合回答的問題](/images/lesson-15-chart-choice.svg)
+![三種圖表和它們適合回答的問題](/images/lesson-16-chart-choice.svg)
 
 ## 跟著做：例子 1——畫出兩班平均數學分
 
@@ -164,13 +164,34 @@ plt.show()
 
 ## 你來做
 
+### 本課可獨立執行：先準備資料
+
+如果你是新開一個 Notebook，先執行以下完整 cell；它會建立本課畫圖會用到的班別平均分：
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+student_data = {
+    "姓名": ["Alex", "Chris", "May", "Sam", "Lily", "Ken"],
+    "班別": ["F4A", "F4A", "F4B", "F4B", "F4A", "F4B"],
+    "數學": [78, 65, 91, 72, 84, 60],
+    "英文": [82, 70, 88, 69, 90, 74]
+}
+
+scores_df = pd.DataFrame(student_data)
+class_math_mean = scores_df.groupby("班別")["數學"].mean()
+```
+
+如果你正接著第 15 課的 Notebook，可以直接使用已經建立的 `class_math_mean`。
+
 ### 基礎題：畫三人的分數比較圖
 
 用長條圖畫出三位同學的數學分數，圖表要有標題和 y 軸名稱。
 
 ### 標準題：從 DataFrame 分組結果畫圖
 
-使用第 14 課的 `class_math_mean`，把各班數學平均分畫成長條圖。提示：可使用：
+使用上方已準備的 `class_math_mean`，把各班數學平均分畫成長條圖。提示：可使用：
 
 ```python
 plt.bar(class_math_mean.index, class_math_mean.values)
@@ -182,6 +203,19 @@ plt.bar(class_math_mean.index, class_math_mean.values)
 
 1. 這張圖回答甚麼問題？
 2. 你從圖中發現甚麼？
+
+如果想觀察兩組數字是否有關係，可先試這個延伸骨架：
+
+```python
+reading_minutes = [20, 35, 30, 50, 45]
+english_scores = [65, 74, 70, 88, 82]
+
+plt.scatter(reading_minutes, english_scores, color="#4f9f8b")
+plt.xlabel("Reading minutes")
+plt.ylabel("English score")
+plt.ylim(0, 100)
+plt.show()
+```
 
 ## 本課小結
 

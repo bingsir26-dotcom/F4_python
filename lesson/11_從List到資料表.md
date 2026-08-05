@@ -1,4 +1,4 @@
-# 第 10 課：從 List 到資料表
+# 第 11 課：從 List 到資料表
 
 > **本課主題：把零散的資料整理成一張可以閱讀、提問和分析的表格。**
 >
@@ -61,7 +61,7 @@ math_scores = [78, 65, 91]
 - 一個**資料列**保存同一位同學的一整份資料。
 - 這類有列、有欄的資料表，在 pandas 中叫做 **DataFrame**。
 
-![由 List 過渡至有列和欄的 DataFrame 資料表](/images/lesson-10-list-to-table.svg)
+![由 List 過渡至有列和欄的 DataFrame 資料表](/images/lesson-11-list-to-table.svg)
 
 ### 2. `import`：把額外工具拿進來
 
@@ -79,9 +79,9 @@ import pandas as pd
 
 之後看到 `pd.DataFrame(...)`，就是在使用 pandas 的 DataFrame 工具。
 
-### 3. 用字典建立 DataFrame
+### 3. 先把每一欄資料排好
 
-下面的字典把每個欄位名稱，配對到一串資料：
+先把它看成「按欄位名稱排好的資料」，暫時不用記住它的正式名稱。每一行都在說：左邊是欄位名稱，右邊是該欄的一串資料：
 
 ```python
 student_data = {
@@ -135,7 +135,7 @@ student_data = {
 }
 ```
 
-建立字典。`"姓名"`、`"班別"`、`"數學"` 是欄位名稱；右邊的 List 是該欄的資料。
+這是一份按欄位排好的資料。`"姓名"`、`"班別"`、`"數學"` 是欄位名稱；右邊的 List 是該欄的資料。現在先學會看懂這個格式，之後才會正式學它的完整名稱。
 
 ```python
 scores_df = pd.DataFrame(student_data)
@@ -165,7 +165,16 @@ scores_df = pd.DataFrame(student_data)
 print(scores_df)
 ```
 
-現在表格多了一欄「英文」。只要欄位內同樣有三筆資料，pandas 便能把它排進同一張表。
+### 預期結果
+
+```text
+      姓名  班別  數學  英文
+0   Alex  F4A  78  82
+1  Chris  F4A  65  70
+2    May  F4B  91  88
+```
+
+現在表格多了一欄「英文」。本次只改了資料中的一欄；只要每欄同樣有三筆資料，pandas 便能把它排進同一張表。
 
 ## 易錯位
 

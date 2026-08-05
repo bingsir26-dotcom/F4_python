@@ -1,4 +1,4 @@
-# 第 11 課：pandas 入門——看懂一張資料表
+# 第 12 課：pandas 入門——看懂一張資料表
 
 > **本課主題：先看清楚資料，再開始分析。**
 >
@@ -27,6 +27,23 @@ print(scores_df["數學"])
 答案是 `scores_df.columns`。它會顯示欄位名稱；三句程式都能看資料，但回答的是不同問題。
 
 ## 新概念
+
+### 本課起始 cell：先執行一次
+
+每次開啟新的 Notebook／Colab，或重新啟動 Kernel 後，先執行這一格。後面的例子會使用 `scores_df`。
+
+```python
+import pandas as pd
+
+student_data = {
+    "姓名": ["Alex", "Chris", "May", "Sam", "Lily"],
+    "班別": ["F4A", "F4A", "F4B", "F4B", "F4A"],
+    "數學": [78, 65, 91, 72, 84],
+    "英文": [82, 70, 88, 69, 90]
+}
+
+scores_df = pd.DataFrame(student_data)
+```
 
 本課沿用一份虛構班級資料：
 
@@ -71,7 +88,7 @@ print(scores_df["數學"])
 
 方括號內寫欄位名稱，就能選出該欄資料。這裡的 `"數學"` 是欄位名稱，所以一定要加引號。
 
-![DataFrame 的欄位、資料列、索引與常用查看方法](/images/lesson-11-dataframe-reading.svg)
+![DataFrame 的欄位、資料列、索引與常用查看方法](/images/lesson-12-dataframe-reading.svg)
 
 ## 跟著做：例子 1——先了解這張成績表
 
@@ -184,7 +201,7 @@ print(scores_df.shape)
 
 ### 基礎題：看資料表大小
 
-在第 10 課建立的資料表中，顯示欄位名稱和 `shape`。它有多少列、多少欄？
+在第 11 課建立的資料表中，顯示欄位名稱和 `shape`。它有多少列、多少欄？
 
 ### 標準題：選出兩欄
 
@@ -192,7 +209,7 @@ print(scores_df.shape)
 
 ### 挑戰題：增加資料後再檢查
 
-在資料表加入一位新同學後，再執行 `head()` 和 `shape`。輸出有甚麼改變？
+回到 `student_data`，在**每一欄最後**加入同一位新同學的資料，然後重新執行 `scores_df = pd.DataFrame(student_data)`、`head()` 和 `shape`。輸出有甚麼改變？
 
 ## 本課小結
 

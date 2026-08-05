@@ -44,13 +44,14 @@ export default defineConfig({
         text: '單元二：資料分析',
         collapsed: true,
         items: [
-          { text: '第 10 課：從 List 到資料表', link: '/10_NumPy入門' },
-          { text: '第 11 課：pandas 入門——看懂資料表', link: '/11_pandas入門' },
-          { text: '第 12 課：篩選與新增欄位', link: '/12_NumPy與pandas銜接' },
-          { text: '第 13 課：資料清洗——處理缺失與錯誤', link: '/13_資料清洗與篩選' },
-          { text: '第 14 課：統計與分組', link: '/14_描述性統計與groupby' },
-          { text: '第 15 課：資料視覺化——用圖表說故事', link: '/15_資料視覺化Matplotlib' },
-          { text: '第 16 課：NumPy——很多數字一起計算', link: '/16_NumPy很多數字一起計算' }
+          { text: '第 10 課：資料分析第一步', link: '/10_資料分析第一步' },
+          { text: '第 11 課：從 List 到資料表', link: '/11_從List到資料表' },
+          { text: '第 12 課：pandas 入門——看懂資料表', link: '/12_pandas入門' },
+          { text: '第 13 課：篩選與新增欄位', link: '/13_篩選與新增欄位' },
+          { text: '第 14 課：資料清洗——處理缺失與錯誤', link: '/14_資料清洗與篩選' },
+          { text: '第 15 課：統計與分組', link: '/15_描述性統計與groupby' },
+          { text: '第 16 課：資料視覺化——用圖表說故事', link: '/16_資料視覺化Matplotlib' },
+          { text: '第 17 課：NumPy——很多數字一起計算', link: '/17_NumPy很多數字一起計算' }
         ]
       }
     ],
