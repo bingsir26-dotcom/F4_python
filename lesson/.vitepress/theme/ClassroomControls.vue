@@ -40,8 +40,8 @@ onBeforeUnmount(() => {
       @click="toggleMode"
     >
       <span aria-hidden="true">{{ isClassroomMode ? '☰' : '▣' }}</span>
-      {{ isClassroomMode ? '顯示導覽' : '上課投影' }}
+      {{ isClassroomMode ? '顯示導覽' : '隱藏導覽' }}
     </button>
-    <span v-if="isClassroomMode" class="classroom-controls__hint">按 Esc 也可返回</span>
+    <span v-if="isClassroomMode" class="classroom-controls__hint">按 Esc 返回</span>
   </div>
 </template>
