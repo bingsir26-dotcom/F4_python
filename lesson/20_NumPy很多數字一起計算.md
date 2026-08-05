@@ -1,4 +1,4 @@
-# 第 17 課：NumPy——很多數字一起計算
+# 第 20 課：NumPy——很多數字一起計算
 
 > **本課主題：當資料是一大串數字時，讓 Python 一次處理整組資料。**
 >
@@ -67,7 +67,7 @@ pandas 適合處理有欄位名稱的表格；NumPy 適合處理很多數字。�
 
 NumPy **不是 AI 本身**；它是處理數字的基礎工具之一，日後很多 AI 程式會用到相似的數字陣列概念。
 
-![NumPy array 對整組數字進行相同運算](/images/lesson-17-numpy-array.svg)
+![NumPy array 對整組數字進行相同運算](/images/lesson-20-numpy-array.svg)
 
 ## 跟著做：例子 1——替所有分數加 5 分
 

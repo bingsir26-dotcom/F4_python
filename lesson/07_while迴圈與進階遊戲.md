@@ -74,6 +74,16 @@ while True:
 
 輸入 `q` 時，`break` 會立即結束整個 `while` 迴圈。
 
+### 4. 使用者輸入不一定完全符合預期
+
+使用者可能在 `q` 前後多打了空格，例如輸入 ` q `。`.strip()` 會移除文字開頭和結尾的空格：
+
+```python
+command = input("輸入 q 離開：").strip()
+```
+
+之後再判斷 `command == "q"`，` q ` 也能被正確當成離開指令。這是最基本的輸入整理；若要處理「把文字當作數字輸入」等情況，還需要更多檢查，不能假設每一筆輸入都完全正確。
+
 ## 跟著做：例子 1——三次密碼挑戰
 
 ```python
@@ -81,7 +91,7 @@ password = "python"
 attempt = 1
 
 while attempt <= 3:
-    guess = input("請輸入密碼：")
+    guess = input("請輸入密碼：").strip()
 
     if guess == password:
         print("登入成功！")
@@ -184,6 +194,24 @@ while True:
 
 在 `if guess == answer:` 中，兩個等號才是比較。單一 `=` 是放入資料。
 
+### ❌ 假設輸入一定沒有空格
+
+```python
+command = input("輸入 q 離開：")
+if command == "q":
+    break
+```
+
+使用者輸入 ` q ` 時，這個條件不成立。
+
+**✅ 修正：**
+
+```python
+command = input("輸入 q 離開：").strip()
+if command == "q":
+    break
+```
+
 ## 你來做
 
 ### 基礎題：倒數到 1
@@ -202,7 +230,7 @@ while True:
 
 1. `while` 在條件成立時重複執行；條件不成立時停止。
 2. 計數器必須更新，否則可能出現無限迴圈。
-3. `break` 可以立即離開目前的迴圈。
+3. `break` 可以立即離開目前的迴圈；`.strip()` 可先整理指令前後多餘的空格。
 
 ## 離堂前 3 分鐘
 

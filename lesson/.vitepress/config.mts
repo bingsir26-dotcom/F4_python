@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   title: 'F4 Python 課程',
-  description: '由零開始學習 Python、資料分析與運算思維',
+  description: '由零開始學習 Python、資料分析與人工智能',
   base: '/F4_python/',
   lang: 'zh-Hant',
   lastUpdated: true,
@@ -16,17 +16,20 @@ export default defineConfig({
   themeConfig: {
     logo: '/images/python-spark.svg',
     siteTitle: 'F4 Python 課程',
-
+    nav: [
+      { text: '課程首頁', link: '/' },
+      { text: '由第 1 課開始', link: '/01_Python介紹與變數' }
+    ],
     sidebar: [
       {
-        text: '起步：先知道自己為何而學',
+        text: '課程導入',
         collapsed: false,
         items: [
           { text: '第 0 課：為甚麼學 Python？', link: '/00_為什麼學Python' }
         ]
       },
       {
-        text: '單元一：Python 基礎',
+        text: '單元一：Python 基礎與互動程式',
         collapsed: false,
         items: [
           { text: '第 1 課：Python、輸出與變數', link: '/01_Python介紹與變數' },
@@ -37,21 +40,71 @@ export default defineConfig({
           { text: '第 6 課：for 迴圈與作品', link: '/06_for迴圈與作品' },
           { text: '第 7 課：while 迴圈與進階遊戲', link: '/07_while迴圈與進階遊戲' },
           { text: '第 8 課：總溫習與綜合應用', link: '/08_總溫習與綜合應用' },
-          { text: 'Python 基礎測驗', link: '/09_Python基礎測驗' }
+          { text: '第 9 課：Python 基礎測驗', link: '/09_Python基礎測驗' },
+          { text: '第 10 課：函式——把重複工作收好', link: '/10_函式' },
+          { text: '第 11 課：Dictionary——用名稱整理一筆資料', link: '/11_Dictionary' }
         ]
       },
       {
-        text: '單元二：資料分析',
+        text: '單元二：資料處理與實用解難',
         collapsed: true,
         items: [
-          { text: '第 10 課：資料分析第一步', link: '/10_資料分析第一步' },
-          { text: '第 11 課：從 List 到資料表', link: '/11_從List到資料表' },
-          { text: '第 12 課：pandas 入門——看懂資料表', link: '/12_pandas入門' },
-          { text: '第 13 課：篩選與新增欄位', link: '/13_篩選與新增欄位' },
-          { text: '第 14 課：資料清洗——處理缺失與錯誤', link: '/14_資料清洗與篩選' },
-          { text: '第 15 課：統計與分組', link: '/15_描述性統計與groupby' },
-          { text: '第 16 課：資料視覺化——用圖表說故事', link: '/16_資料視覺化Matplotlib' },
-          { text: '第 17 課：NumPy——很多數字一起計算', link: '/17_NumPy很多數字一起計算' }
+          { text: '第 12 課：資料分析第一步', link: '/12_資料分析第一步' },
+          { text: '第 13 課：從 Dictionary 到資料表', link: '/13_從Dictionary到資料表' },
+          { text: '第 14 課：pandas 入門——看懂資料表', link: '/14_pandas入門' },
+          { text: '第 15 課：讀取 CSV——使用真實資料', link: '/15_讀取CSV' },
+          { text: '第 16 課：篩選與新增欄位', link: '/16_篩選與新增欄位' },
+          { text: '第 17 課：資料清洗——處理缺失與錯誤', link: '/17_資料清洗與篩選' },
+          { text: '第 18 課：統計與分組', link: '/18_描述性統計與groupby' },
+          { text: '第 19 課：資料視覺化——用圖表說故事', link: '/19_資料視覺化Matplotlib' },
+          { text: '第 20 課：NumPy——很多數字一起計算', link: '/20_NumPy很多數字一起計算' },
+          { text: '第 21 課：資料分析小專題', link: '/21_資料分析小專題' }
+        ]
+      },
+      {
+        text: '單元三：機器學習與資料預測',
+        collapsed: true,
+        items: [
+          { text: '第 22 課：機器學習流程', link: '/22_機器學習流程' },
+          { text: '第 23 課：線性迴歸——房價預測', link: '/23_線性迴歸房價預測' },
+          { text: '第 24 課：分類基礎', link: '/24_分類基礎' },
+          { text: '第 25 課：KNN 與 Logistic Regression', link: '/25_KNN與LogisticRegression' },
+          { text: '第 26 課：模型評估', link: '/26_模型評估' },
+          { text: '第 27 課：欠擬合與過擬合', link: '/27_欠擬合與過擬合' },
+          { text: '第 28 課：Decision Tree 與 Random Forest', link: '/28_DecisionTree與RandomForest' },
+          { text: '第 29 課：K-Means 與 PCA', link: '/29_KMeans與PCA' },
+          { text: '第 30 課：機器學習專題', link: '/30_機器學習專題' }
+        ]
+      },
+      {
+        text: '單元四：IOAI 拔尖人工智能',
+        collapsed: true,
+        items: [
+          { text: '第 31 課：Tensor 與 PyTorch', link: '/31_Tensor與PyTorch' },
+          { text: '第 32 課：感知器與神經網絡', link: '/32_感知器與神經網絡' },
+          { text: '第 33 課：訓練模型', link: '/33_訓練模型' },
+          { text: '第 34 課：訓練技巧', link: '/34_訓練技巧' },
+          { text: '第 35 課：Computer Vision 入門', link: '/35_ComputerVision入門' },
+          { text: '第 36 課：視覺進階專題', link: '/36_視覺進階專題' },
+          { text: '第 37 課：NLP 入門', link: '/37_NLP入門' },
+          { text: '第 38 課：Transformer、LLM 與音訊概覽', link: '/38_TransformerLLM與音訊概覽' },
+          { text: '第 39 課：IOAI 專題與模擬', link: '/39_IOAI專題與模擬' }
+        ]
+      },
+      {
+        text: '單元五：補充與 Python 解難工具箱',
+        collapsed: true,
+        items: [
+          { text: '第 40 課：Tuple 與 Set', link: '/40_Tuple與Set' },
+          { text: '第 41 課：字串進階', link: '/41_字串進階' },
+          { text: '第 42 課：常用解難模式', link: '/42_常用解難模式' },
+          { text: '第 43 課：除錯與測試', link: '/43_除錯與測試' },
+          { text: '第 44 課：純文字檔案', link: '/44_純文字檔案' },
+          { text: '第 45 課：JSON 與日期時間', link: '/45_JSON與日期時間' },
+          { text: '第 46 課：基本 OOP', link: '/46_基本OOP' },
+          { text: '第 47 課：Beautiful Soup', link: '/47_BeautifulSoup' },
+          { text: '第 48 課：Playwright', link: '/48_Playwright' },
+          { text: '第 49 課：Python 解難綜合實作', link: '/49_全澳Python解難比賽模擬' }
         ]
       }
     ],

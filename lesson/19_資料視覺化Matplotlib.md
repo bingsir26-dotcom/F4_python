@@ -1,4 +1,4 @@
-# 第 16 課：資料視覺化——用圖表說故事
+# 第 19 課：資料視覺化——用圖表說故事
 
 > **本課主題：選對圖表，讓別人一眼看見資料想說的事。**
 >
@@ -63,7 +63,7 @@ plt.show()
 - x 軸和 y 軸代表甚麼；
 - 與問題相符的圖表種類。
 
-![三種圖表和它們適合回答的問題](/images/lesson-16-chart-choice.svg)
+![三種圖表和它們適合回答的問題](/images/lesson-19-chart-choice.svg)
 
 ## 跟著做：例子 1——畫出兩班平均數學分
 
@@ -183,7 +183,7 @@ scores_df = pd.DataFrame(student_data)
 class_math_mean = scores_df.groupby("班別")["數學"].mean()
 ```
 
-如果你正接著第 15 課的 Notebook，可以直接使用已經建立的 `class_math_mean`。
+每次獨立開新 Notebook 時，都請先執行本課上方的完整資料建立程式，再使用 `class_math_mean`。不要假設上一課的變數仍然存在。
 
 ### 基礎題：畫三人的分數比較圖
 

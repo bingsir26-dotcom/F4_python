@@ -1,8 +1,8 @@
-# 第 11 課：從 List 到資料表
+# 第 13 課：從 Dictionary 到資料表
 
 > **本課主題：把零散的資料整理成一張可以閱讀、提問和分析的表格。**
 >
-> 你已經會用 List 保存一串資料。這一課會把「一串分數」升級成「有姓名、有班別、有分數」的資料表，正式開始資料分析。
+> 你已經會用 List 保存一串資料，也認識了 Dictionary 的「名稱對應資料」。這一課會把「一串分數」升級成「有姓名、有班別、有分數」的資料表，正式開始資料分析。
 
 ## 今課可以做到甚麼？
 
@@ -61,7 +61,7 @@ math_scores = [78, 65, 91]
 - 一個**資料列**保存同一位同學的一整份資料。
 - 這類有列、有欄的資料表，在 pandas 中叫做 **DataFrame**。
 
-![由 List 過渡至有列和欄的 DataFrame 資料表](/images/lesson-11-list-to-table.svg)
+![由 List 過渡至有列和欄的 DataFrame 資料表](/images/lesson-13-dictionary-table.svg)
 
 ### 2. `import`：把額外工具拿進來
 
@@ -79,9 +79,9 @@ import pandas as pd
 
 之後看到 `pd.DataFrame(...)`，就是在使用 pandas 的 DataFrame 工具。
 
-### 3. 先把每一欄資料排好
+### 3. 用 Dictionary 按欄位整理資料
 
-先把它看成「按欄位名稱排好的資料」，暫時不用記住它的正式名稱。每一行都在說：左邊是欄位名稱，右邊是該欄的一串資料：
+第 11 課學過，Dictionary 用「key：value」把有名稱的資料放在一起。這裡 `student_data` 就是一個 Dictionary：左邊的 key 是欄位名稱，右邊的 value 是該欄的一串資料：
 
 ```python
 student_data = {
@@ -135,7 +135,7 @@ student_data = {
 }
 ```
 
-這是一份按欄位排好的資料。`"姓名"`、`"班別"`、`"數學"` 是欄位名稱；右邊的 List 是該欄的資料。現在先學會看懂這個格式，之後才會正式學它的完整名稱。
+這是一個 Dictionary。`"姓名"`、`"班別"`、`"數學"` 是 key，同時也是將來資料表的欄位名稱；右邊的 List 是各欄的資料。每一欄必須有相同數量的元素。
 
 ```python
 scores_df = pd.DataFrame(student_data)

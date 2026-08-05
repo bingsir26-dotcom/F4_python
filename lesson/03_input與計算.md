@@ -9,7 +9,8 @@
 完成這一課後，你可以：
 
 - 讓程式向使用者提問並接收答案；
-- 把輸入的數字轉換後進行計算；
+- 分辨輸入的文字和可計算的數字，並轉換後進行計算；
+- 用 f-string 把自己的輸入和計算答案清楚顯示；
 - 做出「兩數相加」和「三科平均分」小工具。
 
 ## 開始前：想一想
@@ -47,6 +48,14 @@ print("歡迎", player_name)
 ```text
 歡迎 Alex
 ```
+
+也可以用 f-string 把文字和變數放在同一句：
+
+```python
+print(f"歡迎 {player_name}，準備開始！")
+```
+
+f-string 在開頭引號前加上 `f`；大括號 `{}` 內寫變數名稱，Python 會把變數中的資料放到句子裡。這是在顯示答案時常用的寫法。
 
 ### 2. `input()` 得到的是文字
 
@@ -106,7 +115,7 @@ first_number = int(input("請輸入第一個數字："))
 second_number = int(input("請輸入第二個數字："))
 
 total = first_number + second_number
-print("總和：", total)
+print(f"總和：{total}")
 ```
 
 ### 一次示範
@@ -114,7 +123,7 @@ print("總和：", total)
 ```text
 請輸入第一個數字：12
 請輸入第二個數字：8
-總和： 20
+總和：20
 ```
 
 ### 逐行解釋
@@ -132,10 +141,10 @@ total = first_number + second_number
 這時兩個變數都是整數，所以 `+` 是真正的加法。
 
 ```python
-print("總和：", total)
+print(f"總和：{total}")
 ```
 
-`print()` 可以同時顯示文字和變數內容；中間用逗號分開。
+f-string 會把大括號內的 `total` 換成它的數值，再顯示完整句子。
 
 ## 再試一次：例子 2——三科平均分
 
