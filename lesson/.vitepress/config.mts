@@ -39,17 +39,17 @@ export default defineConfig({
           { text: '第 5 課：列表 List', link: '/05_列表List' },
           { text: '第 6 課：for 迴圈與作品', link: '/06_for迴圈與作品' },
           { text: '第 7 課：while 迴圈與進階遊戲', link: '/07_while迴圈與進階遊戲' },
-          { text: '第 8 課：總溫習與綜合應用', link: '/08_總溫習與綜合應用' },
-          { text: '第 9 課：Python 基礎測驗', link: '/09_Python基礎測驗' },
-          { text: '第 10 課：函式——把重複工作收好', link: '/10_函式' },
-          { text: '第 11 課：Dictionary——用名稱整理一筆資料', link: '/11_Dictionary' }
+          { text: '第 8 課：字串、文字處理與格式化輸出', link: '/08_字串與格式化輸出' },
+          { text: '第 9 課：函式——把重複工作收好', link: '/09_函式' },
+          { text: '第 10 課：Dictionary——用名稱整理一筆資料', link: '/10_Dictionary' },
+          { text: '第 11 課：Python 基礎綜合實作與自我檢查', link: '/11_基礎綜合實作與自我檢查' }
         ]
       },
       {
         text: '單元二：資料處理與實用解難',
         collapsed: true,
         items: [
-          { text: '第 12 課：資料分析第一步', link: '/12_資料分析第一步' },
+          { text: '第 12 課：資料從哪裡來？CSV 與分析問題', link: '/12_資料分析第一步' },
           { text: '第 13 課：從 Dictionary 到資料表', link: '/13_從Dictionary到資料表' },
           { text: '第 14 課：pandas 入門——看懂資料表', link: '/14_pandas入門' },
           { text: '第 15 課：讀取 CSV——使用真實資料', link: '/15_讀取CSV' },
@@ -57,14 +57,14 @@ export default defineConfig({
           { text: '第 17 課：資料清洗——處理缺失與錯誤', link: '/17_資料清洗與篩選' },
           { text: '第 18 課：統計與分組', link: '/18_描述性統計與groupby' },
           { text: '第 19 課：資料視覺化——用圖表說故事', link: '/19_資料視覺化Matplotlib' },
-          { text: '第 20 課：NumPy——很多數字一起計算', link: '/20_NumPy很多數字一起計算' },
-          { text: '第 21 課：資料分析小專題', link: '/21_資料分析小專題' }
+          { text: '第 20 課：資料分析小專題——由資料得出結論', link: '/20_資料分析小專題' }
         ]
       },
       {
         text: '單元三：機器學習與資料預測',
         collapsed: true,
         items: [
+          { text: '第 21 課：NumPy——機器學習前的數字陣列', link: '/21_NumPy機器學習準備' },
           { text: '第 22 課：機器學習流程', link: '/22_機器學習流程' },
           { text: '第 23 課：線性迴歸——房價預測', link: '/23_線性迴歸房價預測' },
           { text: '第 24 課：分類基礎', link: '/24_分類基礎' },

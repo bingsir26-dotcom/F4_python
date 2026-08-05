@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">f-string 將文字和變數放進完整訊息</title>
+  <desc id="desc">左方是兩個變數，中間是帶有大括號的文字模板，右方是最後的歡迎訊息。各區以編號表示閱讀順序，沒有箭頭。</desc>
+  <rect width="1200" height="520" rx="36" fill="#f5f9ff"/>
+  <text x="70" y="82" font-family="Arial, 'Microsoft JhengHei', sans-serif" font-size="40" font-weight="700" fill="#17345f">把資料放進一句清楚的文字</text>
+  <g font-family="Arial, 'Microsoft JhengHei', sans-serif">
+    <rect x="70" y="132" width="290" height="296" rx="28" fill="#e3f0ff" stroke="#8dbaf2" stroke-width="3"/>
+    <circle cx="116" cy="183" r="25" fill="#2367c9"/><text x="108" y="193" font-size="28" font-weight="700" fill="white">1</text>
+    <text x="160" y="193" font-size="28" font-weight="700" fill="#17345f">變數保存資料</text>
+    <text x="108" y="260" font-size="30" fill="#17345f">name = "小美"</text>
+    <text x="108" y="328" font-size="30" fill="#17345f">gold = 120</text>
+    <text x="108" y="388" font-size="22" fill="#47678f">值會因使用者而改變</text>
+
+    <rect x="455" y="132" width="310" height="296" rx="28" fill="#fff4d8" stroke="#e9b855" stroke-width="3"/>
+    <circle cx="501" cy="183" r="25" fill="#d98c00"/><text x="493" y="193" font-size="28" font-weight="700" fill="white">2</text>
+    <text x="545" y="193" font-size="28" font-weight="700" fill="#704700">f-string 模板</text>
+    <rect x="490" y="242" width="240" height="96" rx="16" fill="#263547"/>
+    <text x="512" y="282" font-family="Consolas, monospace" font-size="22" fill="#f7d98a">f"你好，{name}！"</text>
+    <text x="512" y="316" font-family="Consolas, monospace" font-size="22" fill="#f7d98a">f"金幣：{gold}"</text>
+    <text x="512" y="388" font-size="22" fill="#76561d">大括號放變數名稱</text>
+
+    <rect x="860" y="132" width="270" height="296" rx="28" fill="#e8f8e7" stroke="#87bf88" stroke-width="3"/>
+    <circle cx="906" cy="183" r="25" fill="#2d8c45"/><text x="898" y="193" font-size="28" font-weight="700" fill="white">3</text>
+    <text x="950" y="193" font-size="28" font-weight="700" fill="#1c6030">畫面結果</text>
+    <text x="898" y="272" font-size="29" fill="#17345f">你好，小美！</text>
+    <text x="898" y="332" font-size="29" fill="#17345f">金幣：120</text>
+    <text x="898" y="388" font-size="22" fill="#397047">每次輸入都可不同</text>
+  </g>
+</svg>

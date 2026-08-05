@@ -14,7 +14,7 @@
   <circle cx="1040" cy="105" r="190" fill="#bae6fd" opacity=".62"/>
   <circle cx="105" cy="825" r="200" fill="#bbf7d0" opacity=".42"/>
   <text x="600" y="95" text-anchor="middle" font-family="'Microsoft JhengHei', sans-serif" font-size="39" font-weight="700" fill="#0f3e48">Python 讓資料變成看得懂的答案</text>
-  <text x="600" y="143" text-anchor="middle" font-family="'Microsoft JhengHei', sans-serif" font-size="24" fill="#475569">整理 → 計算 → 圖表 → 從例子學習分類</text>
+  <text x="600" y="143" text-anchor="middle" font-family="'Microsoft JhengHei', sans-serif" font-size="24" fill="#475569">整理、計算、圖表、從例子學習分類</text>
 
   <g filter="url(#shadow)">
     <rect x="75" y="215" width="330" height="485" rx="30" fill="#ffffff"/>

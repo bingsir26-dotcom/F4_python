@@ -1,4 +1,4 @@
-# 第 11 課：Dictionary——用名稱整理一筆資料
+# 第 10 課：Dictionary——用名稱整理一筆資料
 
 > **本課主題：把同一個對象的不同資料放在一起，並用名稱快速找出需要的資料。**
 >
@@ -44,7 +44,7 @@ player = {
 - `"Alex"`、`100`、`30` 是 **value（值／資料內容）**；
 - 冒號 `:` 表示名稱和內容的配對；不同配對之間用逗號分開。
 
-![一個角色 Dictionary：name、hp、gold 三個有名稱的資料格](/images/lesson-11-dictionary.svg)
+![一個角色 Dictionary：name、hp、gold 三個有名稱的資料格](/images/lesson-10-dictionary.svg)
 
 你可以把 Dictionary 看成「貼好標籤的資料格」：不是靠第幾個位置尋找，而是直接說出資料名稱。
 

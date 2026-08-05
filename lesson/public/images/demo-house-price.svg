@@ -1732,7 +1732,7 @@ z
      </g>
     </g>
     <g id="text_17">
-     <!-- 68 m² → 497k -->
+     <!-- 68 m²，497k -->
      <g style="fill: #173c3b" transform="translate(94.024 99.738688) scale(0.1 -0.1)">
       <defs>
        <path id="DejaVuSans-2192" d="M 5050 2147 
@@ -1799,7 +1799,6 @@ z
       <use xlink:href="#DejaVuSans-6d" transform="translate(159.033203 0)"/>
       <use xlink:href="#DejaVuSans-b2" transform="translate(256.445312 0)"/>
       <use xlink:href="#DejaVuSans-20" transform="translate(296.533203 0)"/>
-      <use xlink:href="#DejaVuSans-2192" transform="translate(328.320312 0)"/>
       <use xlink:href="#DejaVuSans-20" transform="translate(412.109375 0)"/>
       <use xlink:href="#DejaVuSans-34" transform="translate(443.896484 0)"/>
       <use xlink:href="#DejaVuSans-39" transform="translate(507.519531 0)"/>
