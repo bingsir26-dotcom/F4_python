@@ -1,173 +1,220 @@
-<!-- 由 python.docx 拆分；原始 Word 檔保留不變。 -->
+# 第 6 課：`for` 迴圈與重複工作
 
-# 第 6 課：for 迴圈（Loop）與作品
+> **本課主題：讓 Python 幫你重複做同一件事，而不是把同一行程式寫很多次。**
+>
+> 有 3 個分數可以逐個相加；有 30 個分數時，`for` 迴圈可以替你逐個處理。
 
-## 6.1 為什麼需要迴圈？
+## 今課可以做到甚麼？
 
-先用問題引入：
+完成這一課後，你可以：
 
-👉 如果有 100 個分數，你還要這樣寫嗎？
+- 用 `for` 逐一讀取列表中的每一份資料；
+- 用迴圈計算總分和平均分；
+- 用 `range()` 重複執行指定次數。
 
-```python
-total = scores[0] + scores[1] + scores[2] ...
-```
+## 開始前：想一想
 
-👉 太麻煩！
-
-✅ 解決方法：for 迴圈（自動重複做）
-
-## 6.2 for 迴圈基本語法
+如果有三個分數，你可以這樣顯示：
 
 ```python
-for 變量 in 列表:
+print(scores[0])
+print(scores[1])
+print(scores[2])
 ```
 
-要做的事
+但如果有 40 個分數，要寫多少行？如果明天又多一位同學，程式又要改多少次？
 
-## 6.3 基本例子
+## 新概念
+
+### 1. `for`：對列表中的每一項重複做事
 
 ```python
 scores = [80, 90, 70]
 
-for s in scores:
-    print(s)
+for score in scores:
+    print(score)
 ```
 
-👉 會一個一個印出來
+可以讀成：「對 `scores` 裡的每一個 `score`，顯示它。」
 
-## 6.4 加入計算（重點）
+![for 迴圈逐一讀取列表元素並重複執行](/images/lesson-06-for-loop.svg)
+
+輸出是：
+
+```text
+80
+90
+70
+```
+
+`score` 是我們替「目前正在處理的其中一個分數」取的暫時名字。
+
+### 2. 縮排的程式會重複執行
+
+```python
+for item in ["藥水", "地圖", "鑰匙"]:
+    print("背包物品：", item)
+```
+
+`print()` 有縮排，因此列表中每一個物品都會執行一次。
+
+### 3. 累積總和：先從 `0` 開始
 
 ```python
 scores = [80, 90, 70]
-
 total = 0
 
-for s in scores:
-    total = total + s
+for score in scores:
+    total = total + score
+
+print(total)
+```
+
+每次迴圈都把目前的 `score` 加到 `total`。最後輸出 `240`。
+
+### 4. `range()`：重複指定次數
+
+```python
+for number in range(5):
+    print(number)
+```
+
+輸出是：
+
+```text
+0
+1
+2
+3
+4
+```
+
+`range(5)` 產生 5 個數字，從 `0` 到 `4`。要顯示 1 至 5，可以寫：
+
+```python
+for number in range(1, 6):
+    print(number)
+```
+
+## 跟著做：例子 1——計算小隊總分
+
+```python
+scores = [80, 90, 70]
+total = 0
+
+for score in scores:
+    total = total + score
 
 print("總分：", total)
 ```
 
-## 6.5 計算平均（完整）
+### 預期輸出
+
+```text
+總分： 240
+```
+
+### 逐行解釋
 
 ```python
-scores = [80, 90, 70]
-
 total = 0
-
-for s in scores:
-    total = total + s
-
-avg = total / len(scores)
-
-print("平均：", avg)
 ```
 
-## 6.6 range()（進階一點）
+先準備一個總分盒子，初始值是 `0`。
 
 ```python
-for i in range(5):
-    print(i)
+for score in scores:
 ```
 
-👉 輸出：  
-0 1 2 3 4
-
-## 6.7 常見錯誤
-
-❌ 忘記縮排  
-❌ 變量寫錯  
-❌ 不理解「每次跑一個」
-
-🎮 第 6 課作品：成績管理系統（簡單版）
-
-👉 結合：input + list + for + if
-
-功能：
-
-輸入多個成績
-
-顯示所有成績
-
-計算平均
-
-判斷及格人數
-
-範例程式（學生可完成）
+依序把 `80`、`90`、`70` 放到暫時變數 `score`。
 
 ```python
-scores = []
+total = total + score
+```
 
-# 輸入 3 個成績
-for i in range(3):
-    s = int(input("輸入成績："))
-    scores.append(s)
+第一次得到 `80`，第二次得到 `170`，第三次得到 `240`。
 
-print("所有成績：", scores)
+## 再試一次：例子 2——計算平均分
 
-# 計算平均
+只在上一個程式最後加入兩行：
+
+```python
+average = total / len(scores)
+print("平均分：", average)
+```
+
+`len(scores)` 告訴 Python 有幾個分數，因此不需要自己寫死除以 `3`。
+
+## 易錯位
+
+### ❌ 忘記縮排
+
+**錯誤寫法**
+
+```python
+for score in scores:
+print(score)
+```
+
+**✅ 改成這樣**
+
+```python
+for score in scores:
+    print(score)
+```
+
+### ❌ 把 `total = 0` 放進迴圈內
+
+**錯誤寫法**
+
+```python
+for score in scores:
+    total = 0
+    total = total + score
+```
+
+每次重複時總分都被重設為 `0`，最後只會留下最後一個分數。
+
+**✅ 改成這樣**
+
+```python
 total = 0
-for s in scores:
-    total = total + s
-
-avg = total / len(scores)
-print("平均：", avg)
-
-# 計算及格人數
-count = 0
-for s in scores:
-    if s >= 60:
-        count = count + 1
-
-print("及格人數：", count)
+for score in scores:
+    total = total + score
 ```
 
-🧠 可升級（給強一點學生）
+### ❌ 以為 `range(5)` 包含 5
 
-👉 加等級：
+`range(5)` 的最後一個數字是 `4`。如果想要 `1` 到 `5`，請寫 `range(1, 6)`。
 
-```python
-for s in scores:
-    if s >= 90:
-        print("A")
-    elif s >= 80:
-        print("B")
-    elif s >= 60:
-        print("C")
-    else:
-        print("F")
-```
+## 你來做
 
-🎯 課堂任務設計（建議你用）
+### 基礎題：逐個顯示物品
 
-基礎任務
+建立一個有三個遊戲物品的列表，用 `for` 逐個顯示物品名稱。
 
-印出列表所有數字
+### 標準題：計算金幣總數
 
-計算總和
+建立 `[5, 10, 20, 50]` 的金幣列表，用 `for` 計算總數。
 
-進階任務
+### 挑戰題：倒數計時器
 
-計算平均
+使用 `range(5, 0, -1)` 顯示 5、4、3、2、1，最後顯示「開始！」。
 
-數及格人數
+## 本課小結
 
-挑戰任務（加分）
+1. `for variable in list:` 會逐一處理列表中的元素。
+2. 迴圈內要重複執行的程式必須縮排。
+3. 累加時在迴圈外先設 `total = 0`；`range()` 可控制重複次數。
 
-顯示最高分（提示：自己想）
+## 離堂前 3 分鐘
 
-加等級系統
+1. `for name in names:` 中，`name` 代表甚麼？
+2. 為甚麼 `total = 0` 不應放在迴圈內？
+3. `range(1, 4)` 會產生哪三個數字？
 
-🔥 教學建議（這課超重要）
+## 自我檢查
 
-這一課你可以這樣帶：
-
-用「100 個數據」問題引爆
-
-先只做 print（超簡單）
-
-再加 total（學生會驚訝）
-
-最後做完整作品
-
-👉 重點不是語法，是「重複的概念」
+- 我能否用 `for` 顯示列表內全部資料？
+- 我能否用 `for` 計算列表總和？
+- 我知道 `range(1, 6)` 為甚麼會到 5 嗎？

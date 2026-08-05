@@ -1,178 +1,217 @@
-<!-- 由 python.docx 拆分；原始 Word 檔保留不變。 -->
+# 第 7 課：`while` 迴圈與進階遊戲
 
-# 第 7 課：while 迴圈與進階遊戲
+> **本課主題：只要條件仍然成立，程式就繼續運行。**
+>
+> `for` 適合已知要重複幾次的工作；不知道玩家第幾次才答對時，`while` 就很有用。
 
-## 7.1 什麼是 while？
+## 今課可以做到甚麼？
 
-while 是「只要條件成立，就一直重複執行」。
+完成這一課後，你可以：
 
-👉 和 for 的差別：
+- 用 `while` 讓程式在條件成立時重複執行；
+- 用計數器控制重複次數；
+- 用 `break` 結束猜數字遊戲。
 
-for：跑固定次數
+## 開始前：想一想
 
-while：條件控制（不一定幾次）
+猜數字時，玩家可能第一次答對，也可能第十次才答對。
 
-## 7.2 基本語法
-
-```python
-while 條件:
+```text
+只要還沒答對，就繼續讓玩家猜；
+答對後，遊戲立即結束。
 ```
 
-要做的事
+你猜 Python 怎樣知道「還要不要再問一次」？
 
-## 7.3 基本例子
+## 新概念
+
+### 1. `while`：條件成立就重複
 
 ```python
-i = 0
+count = 1
 
-while i < 5:
-    print(i)
-    i = i + 1
+while count <= 3:
+    print("第", count, "次挑戰")
+    count = count + 1
 ```
 
-👉 如果沒有 i = i + 1 會怎樣？  
-✅ 會變「無限迴圈」（電腦一直跑）
+輸出是：
 
-## 7.4 無限迴圈（概念）
+```text
+第 1 次挑戰
+第 2 次挑戰
+第 3 次挑戰
+```
+
+每次重複後，`count = count + 1` 會令計數器增加，最後 `count <= 3` 不成立，迴圈停止。
+
+![while 迴圈：檢查條件、執行、更新資料、再檢查](/images/lesson-07-while-loop.svg)
+
+### 2. 不更新條件會造成無限迴圈
+
+```python
+count = 1
+
+while count <= 3:
+    print(count)
+```
+
+這個程式沒有令 `count` 改變，所以條件永遠成立，會不停輸出 `1`。如果不小心遇到這種情況，在 Jupyter 可按停止按鈕中斷執行。
+
+### 3. `break`：立即離開迴圈
+
+`while True` 表示條件永遠成立，因此要配合 `break` 在適當時候離開。
 
 ```python
 while True:
-    print("一直跑")
-```
+    command = input("輸入 q 離開：")
 
-👉 通常要搭配「停止條件」
-
-## 7.5 break（中止迴圈）
-
-```python
-while True:
-    x = input("輸入 exit 離開：")
-
-    if x == "exit":
+    if command == "q":
         break
+
+    print("你輸入了：", command)
 ```
 
-👉 break = 強制停止
+輸入 `q` 時，`break` 會立即結束整個 `while` 迴圈。
 
-🎮 小遊戲：無限猜數字（升級版）
+## 跟著做：例子 1——三次密碼挑戰
 
-👉 比第 4 課更好玩（可以一直猜）
+```python
+password = "python"
+attempt = 1
 
-基本版
+while attempt <= 3:
+    guess = input("請輸入密碼：")
+
+    if guess == password:
+        print("登入成功！")
+        break
+    else:
+        print("密碼不正確。")
+
+    attempt = attempt + 1
+```
+
+### 逐行解釋
+
+```python
+attempt = 1
+while attempt <= 3:
+```
+
+從第一次挑戰開始，只要挑戰次數不超過 3，就繼續詢問密碼。
+
+```python
+if guess == password:
+    print("登入成功！")
+    break
+```
+
+猜中時顯示成功訊息，再用 `break` 跳出迴圈，不用再問下一次。
+
+```python
+attempt = attempt + 1
+```
+
+猜錯後才把次數加一，為下一次挑戰準備。
+
+## 再試一次：例子 2——猜數字直到答對
+
+把固定密碼改成數字答案：
 
 ```python
 answer = 7
 
 while True:
-    guess = int(input("猜數字："))
+    guess = int(input("猜一個 1 至 10 的數字："))
 
     if guess == answer:
         print("答對了！")
         break
     elif guess > answer:
-        print("太大了")
+        print("太大了。")
     else:
-        print("太小了")
+        print("太小了。")
 ```
 
-升級版（計算次數）
+這次不知道玩家要猜多少次，但只要未猜中，迴圈就會繼續。
+
+## 易錯位
+
+### ❌ 忘記更新計數器
+
+**錯誤寫法**
 
 ```python
-answer = 7
-count = 0
+count = 1
+while count <= 3:
+    print(count)
+```
 
-while True:
-    guess = int(input("猜數字："))
+`count` 永遠是 `1`，程式不會自己停下來。
+
+**✅ 改成這樣**
+
+```python
+count = 1
+while count <= 3:
+    print(count)
     count = count + 1
-
-    if guess == answer:
-        print("答對了！")
-        print("你猜了", count, "次")
-        break
-    elif guess > answer:
-        print("太大了")
-    else:
-        print("太小了")
 ```
 
-## 7.6 加入隨機（進階，超有趣🔥）
+### ❌ `break` 沒有縮排在判斷內
+
+**錯誤寫法**
 
 ```python
-import random
-
-answer = random.randint(1, 10)
-```
-
-👉 每次答案不同（學生會很有感）
-
-🎯 第 7 課作品：猜數字終極版
-
-功能：
-
-隨機答案
-
-無限猜
-
-提示大小
-
-顯示次數
-
-👉 完整版本：
-
-```python
-import random
-
-answer = random.randint(1, 10)
-count = 0
-
 while True:
-    guess = int(input("請猜 1-10："))
-    count = count + 1
-
-    if guess == answer:
-        print("答對了！")
-        print("次數：", count)
-        break
-    elif guess > answer:
-        print("太大")
-    else:
-        print("太小")
+    guess = input("猜：")
+break
 ```
 
-## 7.7 常見錯誤
+`break` 必須位於迴圈內，而且通常要放在某個 `if` 的縮排區塊。
 
-忘記更新變量（變無限迴圈）
+**✅ 改成這樣**
 
-忘記 break
+```python
+while True:
+    guess = input("猜：")
+    if guess == "q":
+        break
+```
 
-縮排錯誤
+### ❌ 把比較寫成 `=`
 
-🧠 課堂任務設計
+在 `if guess == answer:` 中，兩個等號才是比較。單一 `=` 是放入資料。
 
-基礎
+## 你來做
 
-用 while 印 1–5
+### 基礎題：倒數到 1
 
-進階
+從 `count = 5` 開始，用 `while` 顯示 5、4、3、2、1。
 
-做猜數字（固定答案）
+### 標準題：輸入密碼直到正確
 
-挑戰
+設定固定密碼，讓使用者一直輸入，答對時顯示「成功」並用 `break` 結束。
 
-加入 random
+### 挑戰題：三次猜數字
 
-顯示猜幾次
+限制玩家最多猜 3 次；每次顯示「太大」或「太小」，答對或次數用完後停止。
 
-🔥 教學建議（這課關鍵）
+## 本課小結
 
-你可以這樣帶：
+1. `while` 在條件成立時重複執行；條件不成立時停止。
+2. 計數器必須更新，否則可能出現無限迴圈。
+3. `break` 可以立即離開目前的迴圈。
 
-先問：「怎樣讓程式一直跑？」
+## 離堂前 3 分鐘
 
-示範 while（故意做無限迴圈😆）
+1. `while hp > 0:` 代表程式在甚麼情況下會繼續？
+2. 為甚麼計數器要更新？
+3. `break` 的作用是甚麼？
 
-再教 break（解救程式）
+## 自我檢查
 
-直接做猜數字
-
-👉 這一課會「很好玩」，氣氛通常很好
+- 我能否說出 `for` 和 `while` 的分別？
+- 我能否寫出一個有計數器的 `while`？
+- 我知道如何安全地結束 `while True` 嗎？
