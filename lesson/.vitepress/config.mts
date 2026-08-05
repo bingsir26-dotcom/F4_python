@@ -44,12 +44,13 @@ export default defineConfig({
         text: '單元二：資料分析',
         collapsed: true,
         items: [
-          { text: '第 10 課：NumPy 入門', link: '/10_NumPy入門' },
-          { text: '第 11 課：pandas 入門', link: '/11_pandas入門' },
-          { text: '第 12 課：NumPy 與 pandas 銜接', link: '/12_NumPy與pandas銜接' },
-          { text: '第 13 課：資料清洗與篩選', link: '/13_資料清洗與篩選' },
-          { text: '第 14 課：描述性統計與 groupby', link: '/14_描述性統計與groupby' },
-          { text: '第 15 課：資料視覺化 Matplotlib', link: '/15_資料視覺化Matplotlib' }
+          { text: '第 10 課：從 List 到資料表', link: '/10_NumPy入門' },
+          { text: '第 11 課：pandas 入門——看懂資料表', link: '/11_pandas入門' },
+          { text: '第 12 課：篩選與新增欄位', link: '/12_NumPy與pandas銜接' },
+          { text: '第 13 課：資料清洗——處理缺失與錯誤', link: '/13_資料清洗與篩選' },
+          { text: '第 14 課：統計與分組', link: '/14_描述性統計與groupby' },
+          { text: '第 15 課：資料視覺化——用圖表說故事', link: '/15_資料視覺化Matplotlib' },
+          { text: '第 16 課：NumPy——很多數字一起計算', link: '/16_NumPy很多數字一起計算' }
         ]
       }
     ],

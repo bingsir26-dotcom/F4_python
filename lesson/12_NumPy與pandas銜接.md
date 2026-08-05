@@ -1,318 +1,220 @@
-<!-- 由 python.docx 拆分；原始 Word 檔保留不變。 -->
+# 第 12 課：從資料找答案——篩選與新增欄位
 
-# NumPy + pandas 的銜接課
+> **本課主題：不只是看表格，而是用條件找出你真正想看的資料。**
+>
+> 上一課你學會閱讀資料表；這一課會用條件找出及格學生，並加入總分和平均分，讓資料表開始回答問題。
 
-## 1. 為什麼要先學 NumPy，再學 pandas？
+## 今課可以做到甚麼？
 
-NumPy 是處理數字和陣列的工具，pandas 是處理表格資料的工具。  
-很多資料分析工作，都是先把數字整理好，再放進表格中分析，所以這兩個工具常常一起使用。
+- 篩選出符合一個或多個條件的資料；
+- 新增總分、平均分等計算欄位；
+- 用資料回答「誰及格？」、「哪位學生總分最高？」等問題。
 
-你可以跟學生說：
+## 開始前：想一想
 
-NumPy 負責處理數字，pandas 負責整理表格。
-
-## 2. 兩者的分工
-
-NumPy
-
-NumPy 主要處理：
-
-數字
-
-陣列
-
-平均
-
-總和
-
-矩陣
-
-pandas
-
-pandas 主要處理：
-
-表格
-
-欄位
-
-列資料
-
-CSV / Excel
-
-資料整理
-
-## 3. NumPy 和 pandas 的關係
-
-可以這樣理解：
-
-NumPy 像一個數學工具箱
-
-pandas 像一個表格整理箱
-
-pandas 底層很多時候也會用到 NumPy，所以兩者關係很密切。  
-學會 NumPy，之後學 pandas 會更容易。
-
-## 4. 由 NumPy 轉到 pandas 的例子
-
-NumPy：先處理數字
+第一單元你寫過：
 
 ```python
-import numpy as np
-
-scores = np.array([80, 90, 75, 60])
-print(scores)
-print(np.mean(scores))
+if score >= 60:
+    print("及格")
 ```
 
-這裡我們先用 NumPy 把分數存成陣列，並計算平均。
+如果現在有 40 位學生，難道要手動寫 40 次 `if` 嗎？
 
-pandas：把資料整理成表格
+### 先猜一猜
+
+```python
+scores_df["數學"] >= 60
+```
+
+這行程式不會立刻選出學生；它會為每一列產生 `True` 或 `False`。你猜 `True` 代表甚麼？
+
+答案是：該列的數學成績符合「60 分或以上」。接著我們便可用這組 True／False 篩選資料。
+
+## 新概念
+
+### 1. 篩選和 `if` 的關係
+
+```python
+scores_df["數學"] >= 60
+```
+
+這和第一單元的判斷概念相同，只是 pandas 一次為整欄資料作比較。
+
+```python
+scores_df[scores_df["數學"] >= 60]
+```
+
+外層的 `scores_df[...]` 表示「保留符合條件的資料列」。
+
+### 2. 新增一欄計算結果
+
+```python
+scores_df["總分"] = scores_df["數學"] + scores_df["英文"]
+```
+
+右邊先把每位同學的數學和英文相加，左邊把結果保存到新欄位 `"總分"`。
+
+### 3. 同時符合兩個條件
+
+```python
+scores_df[(scores_df["數學"] >= 60) & (scores_df["英文"] >= 60)]
+```
+
+- `&` 表示「而且」：兩個條件都要成立。
+- 每一個條件都要用括號包起來。
+
+![從條件、True／False 到篩選結果與新增欄位](/images/lesson-12-filtering.svg)
+
+## 跟著做：例子 1——找出數學及格的學生
 
 ```python
 import pandas as pd
 
-data = {
-    "姓名": ["Tom", "Mary", "John", "Alice"],
-    "分數": [80, 90, 75, 60]
+student_data = {
+    "姓名": ["Alex", "Chris", "May", "Sam", "Lily"],
+    "班別": ["F4A", "F4A", "F4B", "F4B", "F4A"],
+    "數學": [78, 55, 91, 72, 84],
+    "英文": [82, 70, 88, 69, 90]
 }
 
-df = pd.DataFrame(data)
-print(df)
+scores_df = pd.DataFrame(student_data)
+passed_math = scores_df[scores_df["數學"] >= 60]
+print(passed_math)
 ```
 
-這裡把數據變成表格，方便查看和分析。
+### 預期輸出
 
-## 5. 用 NumPy 幫 pandas 建資料
+```text
+     姓名  班別  數學  英文
+0  Alex  F4A  78  82
+2   May  F4B  91  88
+3   Sam  F4B  72  69
+4  Lily  F4A  84  90
+```
+
+Chris 的數學是 55，所以不符合條件，沒有出現在結果中。
+
+### 逐行解釋
 
 ```python
-import numpy as np
-import pandas as pd
-
-scores = np.array([80, 90, 75, 60])
-
-df = pd.DataFrame({
-    "分數": scores
-})
-
-print(df)
+scores_df["數學"] >= 60
 ```
 
-這裡先用 NumPy 建立數字，再交給 pandas 做表格。
-
-## 6. pandas 裡也可以使用 NumPy 的結果
+逐一比較數學欄的每個分數，得到 True／False 結果。
 
 ```python
-import numpy as np
-import pandas as pd
-
-scores = np.array([80, 90, 75, 60])
-
-df = pd.DataFrame({
-    "分數": scores,
-    "是否及格": scores >= 60
-})
-
-print(df)
+passed_math = scores_df[scores_df["數學"] >= 60]
 ```
 
-這個例子很適合上課講解，因為學生可以看到：
-
-NumPy 做數字比較
-
-pandas 顯示成表格
-
-## 7. 為什麼這樣搭配很好？
-
-這樣搭配的好處是：
-
-NumPy 處理數字快
-
-pandas 顯示資料清楚
-
-很適合做成績分析
-
-很適合做學生資料整理
-
-很適合之後學資料分析和 AI
-
-## 8. 教學示範：成績表
+保留比較結果為 True 的資料列，並保存到 `passed_math`。
 
 ```python
-import numpy as np
-import pandas as pd
-
-names = ["Tom", "Mary", "John", "Alice"]
-scores = np.array([80, 90, 75, 60])
-
-df = pd.DataFrame({
-    "姓名": names,
-    "分數": scores,
-    "是否及格": scores >= 60
-})
-
-print(df)
+print(passed_math)
 ```
 
-這個例子很完整，可以讓學生一次看到：
+顯示篩選後的表格。
 
-list
-
-NumPy array
-
-DataFrame
-
-比較運算
-
-表格輸出
-
-## 9. 再進一步：計算平均和最高分
+## 再試一次：例子 2——加入總分和平均分
 
 ```python
-import numpy as np
-import pandas as pd
+scores_df["總分"] = scores_df["數學"] + scores_df["英文"]
+scores_df["平均分"] = scores_df["總分"] / 2
 
-scores = np.array([80, 90, 75, 60])
-
-df = pd.DataFrame({
-    "分數": scores
-})
-
-print("平均分數：", np.mean(scores))
-print("最高分數：", np.max(scores))
-print("最低分數：", np.min(scores))
+print(scores_df[["姓名", "總分", "平均分"]])
 ```
 
-學生會明白：
+### 預期輸出
 
-NumPy 負責計算
+```text
+     姓名  總分   平均分
+0  Alex  160  80.0
+1 Chris  125  62.5
+2   May  179  89.5
+3   Sam  141  70.5
+4  Lily  174  87.0
+```
 
-pandas 負責整理顯示
+只改了「新增欄位」這個元素，但原本的資料表現在能回答更多問題。
 
-## 10. 課堂活動建議
+## 易錯位
 
-活動 1：分數表
-
-請學生輸入 3 到 5 個分數，先用 NumPy 存資料，再用 pandas 顯示成表格。
-
-活動 2：及格判斷
-
-把分數資料做成一欄「是否及格」，讓學生觀察真假值。
-
-活動 3：找統計數字
-
-用 NumPy 計算：
-
-平均
-
-最高
-
-最低  
-再用 pandas 顯示結果。
-
-## 11. 課堂小結
-
-NumPy 和 pandas 是資料處理最常一起使用的兩個工具。  
-NumPy 擅長處理數字和陣列，pandas 擅長處理表格和資料分析。  
-學會兩者的配合，學生就可以開始做真正的資料處理工作。
-
-## 12. 一句話版本
-
-NumPy 負責算數字，pandas 負責整理表格，兩者一起用最適合做資料分析。
-
-課後練習
-
-練習 1
-
-用 NumPy 建立一個分數陣列：
+### ❌ 用 `and` 連接兩個欄位條件
 
 ```python
-[70, 85, 90, 60, 75]
+scores_df[(scores_df["數學"] >= 60) and (scores_df["英文"] >= 60)]
 ```
 
-並計算平均分數。
+**原因：** pandas 比較整欄資料時，要使用 `&`，不能使用 Python 單一條件的 `and`。
 
-練習 2
-
-把上面的分數放進 pandas 的 DataFrame，欄位名稱叫「分數」。
-
-練習 3
-
-再加一欄「是否及格」，條件是分數大於或等於 60。
-
-練習 4
-
-用 NumPy 計算最高分和最低分。
-
-練習 5
-
-建立一個學生姓名列表，再和分數一起放入 DataFrame。
-
-練習參考答案
-
-答案 1
+**✅ 修正：**
 
 ```python
-import numpy as np
-
-scores = np.array([70, 85, 90, 60, 75])
-print(np.mean(scores))
+scores_df[(scores_df["數學"] >= 60) & (scores_df["英文"] >= 60)]
 ```
 
-答案 2
+### ❌ 忘記條件的括號
 
 ```python
-import numpy as np
-import pandas as pd
-
-scores = np.array([70, 85, 90, 60, 75])
-
-df = pd.DataFrame({
-    "分數": scores
-})
-
-print(df)
+scores_df[scores_df["數學"] >= 60 & scores_df["英文"] >= 60]
 ```
 
-答案 3
+**✅ 修正：** 每一個比較條件都用括號包起來。
 
 ```python
-import numpy as np
-import pandas as pd
-
-scores = np.array([70, 85, 90, 60, 75])
-
-df = pd.DataFrame({
-    "分數": scores,
-    "是否及格": scores >= 60
-})
-
-print(df)
+scores_df[(scores_df["數學"] >= 60) & (scores_df["英文"] >= 60)]
 ```
 
-答案 4
+### ❌ 把新欄位放在右邊
 
 ```python
-import numpy as np
-
-scores = np.array([70, 85, 90, 60, 75])
-
-print(np.max(scores))
-print(np.min(scores))
+scores_df["數學"] + scores_df["英文"] = scores_df["總分"]
 ```
 
-答案 5
+**原因：** Python 要先計算右邊，再把結果放入左邊。
+
+**✅ 修正：**
 
 ```python
-import numpy as np
-import pandas as pd
-
-names = ["Tom", "Mary", "John", "Alice", "Ben"]
-scores = np.array([70, 85, 90, 60, 75])
-
-df = pd.DataFrame({
-    "姓名": names,
-    "分數": scores
-})
-
-print(df)
+scores_df["總分"] = scores_df["數學"] + scores_df["英文"]
 ```
+
+## 你來做
+
+### 基礎題：找出英文及格學生
+
+篩選英文 `60` 分或以上的學生。
+
+### 標準題：兩科都及格
+
+篩選數學和英文都 `60` 分或以上的學生，只顯示姓名和兩科分數。
+
+### 挑戰題：新增等級欄位
+
+新增 `"是否總分達標"` 欄位。總分 `160` 或以上為 `True`，否則為 `False`。提示：
+
+```python
+scores_df["總分"] >= 160
+```
+
+## 本課小結
+
+1. `scores_df[條件]` 可以保留符合條件的資料列。
+2. pandas 能一次比較整欄資料，產生 True／False 結果。
+3. 用 `資料表["新欄位"] = 計算結果` 可以加入新欄位。
+
+## 離堂前 3 分鐘
+
+1. `scores_df[scores_df["英文"] >= 60]` 會保留哪一類學生？
+2. 在 pandas 中，同時符合兩個條件要使用甚麼符號？
+3. 以下程式新增的是哪一欄？
+
+   ```python
+   scores_df["總分"] = scores_df["數學"] + scores_df["英文"]
+   ```
+
+## 自我檢查
+
+- 我能否把 `if` 的條件概念連接到 pandas 篩選？
+- 我能否篩選一個條件和兩個條件？
+- 我能否新增一欄計算結果？
