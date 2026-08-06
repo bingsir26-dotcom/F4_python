@@ -1,36 +1,32 @@
-# 第 46 課：基本 OOP——用物件描述角色與事物
+# 第 46 課：基本 OOP——把資料和動作放進同一個角色
 
-> **本課主題：認識 class、object、attribute 和 method，將相關資料和行為放在一起。**
+> **本課主題：用 class 建立可重複使用的物件，讓每個角色各自保存資料並執行自己的動作。**
+>
+> class 不是所有程式都必須使用。當「一件事物」有多項資料和多個相關動作，例如遊戲角色、書籍或感測器時，它能令結構更清楚。
 
 ## 今課可以做到甚麼？
 
-完成這一課後，你可以：
-
-- 建立一個有屬性和方法的簡單 class；
-- 由同一個 class 建立多個不同 object；
-- 看懂 `self` 在方法中的作用。
+- 建立一個最小的 class 和 object；
+- 讓每個 object 保存自己的名稱、血量或金幣；
+- 呼叫方法更新目前 object 的資料。
 
 ## 開始前：想一想
 
-遊戲中每個角色都有名稱、HP 和金幣，也都可以顯示狀態或取得金幣。如果每個角色都用很多個獨立變數表示，角色多了會怎樣？
+遊戲有兩個角色：Ava 和 Ben。兩人各有自己的名字、血量和金幣。如果所有資料都分散在很多變數，例如 `ava_hp`、`ben_hp`、`ava_gold`，角色愈多時會變得怎樣？
 
 ## 新概念
 
-### 1. Class 是藍圖，object 是按藍圖建立的個體
+### 1. class 是建立物件的藍圖
 
-`Player` 可以是角色的藍圖；`amy` 和 `ben` 是根據這個藍圖建立的兩個 object。每個 object 有自己的資料。
+`class Player:` 描述一類角色應有甚麼資料和動作。`Player("Ava", 100)` 則按這個藍圖建立一個實際 object。
 
-### 2. Attribute 與 method
+### 2. self 是目前這個 object
 
-- **attribute**：物件保存的資料，例如 `name`、`hp`；
-- **method**：物件可以做的事，例如 `show_status()`、`earn_gold()`；
-- `self` 代表「目前正在使用這個方法的 object」。
+在 class 內，`self.name` 表示「這個角色的名字」，`self.gold` 表示「這個角色的金幣」。不同 object 有各自的 `self` 資料，不會混在一起。
 
-這一課只學基本結構；class 不一定比 List 或 Dictionary 更好，當資料和動作本來就屬於同一件事時才值得使用。
+![Player 藍圖包含 name、hp、gold；Ava 和 Ben 是各自擁有不同數值的兩個 object](/images/lesson-46-basic-oop.svg)
 
-![基本 OOP——用物件描述角色與事物概念圖](/images/lesson-46-basic-oop.svg)
-
-## 跟著做：例子 1——建立遊戲角色
+## 跟著做：例子 1——建立一個遊戲角色
 
 ```python
 class Player:
@@ -40,88 +36,108 @@ class Player:
         self.gold = 0
 
     def show_status(self):
-        print(f"{self.name}：HP {self.hp}，Gold {self.gold}")
+        print(f"{self.name}：HP {self.hp}，金幣 {self.gold}")
 
-    def earn_gold(self, amount):
-        self.gold = self.gold + amount
-
-amy = Player("Amy", 100)
-amy.earn_gold(30)
-amy.show_status()
+ava = Player("Ava", 100)
+ava.show_status()
 ```
 
-### 預期輸出／結果
+### 預期輸出
 
 ```text
-Amy：HP 100，Gold 30
+Ava：HP 100，金幣 0
 ```
 
 ### 逐行解釋
 
-`class Player:` 建立藍圖。`__init__()` 在建立 object 時自動執行，替角色設定初始資料。呼叫 `amy.earn_gold(30)` 時，`self` 就是 `amy`，所以只有 Amy 的金幣會更新。
+`__init__` 在建立 object 時執行。`name` 和 `hp` 是建立時提供的資料；`self.name = name` 把它們保存到這個角色身上。每個新角色都由金幣 `0` 開始。
 
-## 再試一次：例子 2——同一藍圖建立兩位角色
+`ava.show_status()` 呼叫 Ava 這個 object 的方法，因此方法中的 `self` 代表 Ava。
+
+## 再試一次：例子 2——讓不同角色各自賺取金幣
 
 ```python
-ben = Player("Ben", 80)
-ben.earn_gold(10)
+class Player:
+    def __init__(self, name, hp):
+        self.name = name
+        self.hp = hp
+        self.gold = 0
 
-amy.show_status()
+    def earn_gold(self, amount):
+        self.gold = self.gold + amount
+
+    def show_status(self):
+        print(f"{self.name}：HP {self.hp}，金幣 {self.gold}")
+
+ava = Player("Ava", 100)
+ben = Player("Ben", 80)
+ava.earn_gold(20)
+ben.earn_gold(5)
+ava.show_status()
 ben.show_status()
 ```
 
-### 這次改了甚麼？
+### 預期輸出
 
-`amy` 和 `ben` 都來自 `Player`，但它們保存自己的 `hp` 和 `gold`。同一 class 可以建立很多 object，避免重複寫相同的功能。這段程式需在例子 1 的 class 定義後執行。
+```text
+Ava：HP 100，金幣 20
+Ben：HP 80，金幣 5
+```
+
+`earn_gold()` 只改變呼叫它的 object。Ava 取得 20 金幣不會令 Ben 的金幣改變。
 
 ## 易錯位
 
-### ❌ 忘記在方法第一個參數寫 `self`
+### ❌ 忘記在方法第一個位置寫 self
 
-**原因：** Python 呼叫 object 的方法時，會自動把目前 object 傳進來。
+```python
+# def earn_gold(amount):
+```
 
-**修正方法：** 所有 instance method 的第一個參數先寫 `self`。
+**原因：** Python 呼叫 object 方法時，會自動把目前 object 傳進第一個位置。
 
-### ❌ 寫成 `gold = gold + amount`
+**✅ 修正：** 寫成 `def earn_gold(self, amount):`。
 
-**原因：** 這會找不到目前 object 的金幣資料。
+### ❌ 把 object 資料寫成普通變數
 
-**修正方法：** 使用 `self.gold = self.gold + amount`。
+`gold = 0` 只是一個方法內的暫時變數，不能代表每個角色各自的金幣。
 
-### ❌ 每個 object 共用同一份資料
+**✅ 修正：** 寫 `self.gold = 0` 保存到 object。
 
-**原因：** 若把可變 List 放成 class 層級資料，所有 object 可能互相影響。
+### ❌ 為很小的一次性資料硬用 class
 
-**修正方法：** 初學階段先在 `__init__()` 內建立每個 object 自己的資料。
+只有兩三個臨時數字時，Dictionary 或 List 可能更直接。
+
+**✅ 修正：** 當資料和一組動作真的屬於同一件事時才考慮 class。
 
 ## 你來做
 
-### 基礎題
+### 基礎題：加入 heal 方法
 
-建立 `Book` class，保存書名和是否已借出，並寫一個顯示狀態的方法。
+為 `Player` 加入 `heal(self, amount)`，令角色 HP 增加指定數字。
 
-### 標準題
+### 標準題：建立 Book class
 
-建立兩個 `Pet` object，各自有名字和飢餓值；寫方法讓飢餓值增加。
+建立 `Book(title, pages)`，再寫 `show_info()` 顯示書名和頁數。
 
-### 挑戰題
+### 挑戰題：限制血量
 
-把第 11 課的一筆遊戲角色 Dictionary 改寫成 class；比較兩種寫法各自較適合甚麼情況。
+加入 `max_hp`，令 `heal()` 後的 HP 不會超過最大血量。提示：可使用 `min()`。
 
 ## 本課小結
 
-1. class 是藍圖，object 是按藍圖建立的個體。
-2. attribute 保存資料，method 定義物件能做的事。
-3. `self` 讓方法操作目前這一個 object 的資料。
+1. class 是建立一類 object 的藍圖。
+2. 每個 object 保存自己的資料，例如 Ava 和 Ben 的金幣。
+3. `self` 指向目前正在執行方法的 object。
 
 ## 離堂前 3 分鐘
 
-1. `Player`、`amy`、`amy.gold` 分別是 class、object 還是 attribute？
-2. 為甚麼 `earn_gold()` 要使用 `self.gold`？
-3. `__init__()` 通常在甚麼時候執行？
+1. `class Player` 和 `ava = Player(...)` 有甚麼分別？
+2. 為甚麼兩個 Player 可以有不同金幣？
+3. `self.gold` 中的 `self` 指甚麼？
 
 ## 自我檢查
 
-- 我能否分辨 class 和 object？
-- 我能否在 `__init__()` 設定初始 attribute？
-- 我能否寫一個更新 object 資料的方法？
+- 我能否建立一個有資料和方法的最小 class？
+- 我能否解釋 object 為甚麼有各自的資料？
+- 我會否先判斷 class 是否真的令程式更清楚？

@@ -1,58 +1,75 @@
-# 第 47 課：Beautiful Soup——由 HTML 取出公開資料
+# 第 47 課：Beautiful Soup——從公開 HTML 選出資料
 
-> **本課主題：讀懂基本 HTML，使用 Beautiful Soup 從已取得的公開網頁內容選出文字和連結。**
+> **本課主題：先讀懂 HTML 的標籤和 class，再使用 Beautiful Soup 選取需要的公開內容。**
+>
+> Beautiful Soup 是分析**已取得的 HTML 文字**的工具，不是取得任何資料的通行證。先找官方 API 或可下載資料；處理網頁時必須尊重條款、私隱和網站負荷。
 
 ## 今課可以做到甚麼？
 
-完成這一課後，你可以：
-
-- 從 HTML 中選取標題、段落和連結；
-- 使用 `find()`、`find_all()` 和 CSS selector；
-- 知道爬取公開資料時要遵守網站條款、速率限制和私隱原則。
+- 用 `find()` 取出一個標題；
+- 用 CSS selector 取出多個指定元素；
+- 說出公開網頁資料也不能隨意大量擷取的原因。
 
 ## 開始前：想一想
 
-網頁看起來像一篇文章，但電腦看到的是大量 HTML 標籤。假如只想取出所有課程名稱，怎樣告訴程式「哪些文字才是我要的」？
+網頁畫面上有三個課程卡片。對人來說，它們很清楚；對電腦來說卻是一大段 HTML。怎樣告訴程式「只取每張卡片的課程名稱」？
 
 ## 新概念
 
-### 1. Beautiful Soup 做甚麼？
+### 1. HTML 用標籤表達結構
 
-Beautiful Soup 不會自動讓你「隨意取得任何網站資料」。它的工作是把**已取得的 HTML 文字**整理成可查詢的結構，然後選出需要的元素。
+`<h1>` 是大標題、`<p>` 是段落、`<a>` 是連結。`class="course"` 像給元素加上分類名稱，讓我們可以精確選取。
 
-常見 HTML 元素包括：
+### 2. Beautiful Soup 把 HTML 變成可查詢結構
 
-- `<h1>`：大標題；
-- `<p>`：段落；
-- `<a>`：連結；
-- `class`：給元素加上的分類名稱。
+`BeautifulSoup(html, "html.parser")` 把一段 HTML 文字交給解析器。`find()` 取第一個符合的元素；`select()` 依 CSS selector 取出多個元素。
 
-### 2. 負責任地使用爬蟲
+![一段 HTML 有三張 course 卡片；以 .course h2 選取三個課程標題；只留下整理後的文字清單](/images/lesson-47-beautiful-soup.svg)
 
-只處理公開和允許使用的資料；先閱讀網站條款和 `robots.txt`；不要收集個人資料；不要高速連續請求網站；不得以爬蟲繞過登入、付費牆或存取限制。
-
-![Beautiful Soup——由 HTML 取出公開資料概念圖](/images/lesson-47-beautiful-soup.svg)
-
-## 跟著做：例子 1——由一小段 HTML 取出課程名稱
+## 跟著做：例子 1——從小 HTML 取出頁面標題
 
 ```python
-# 先在終端機安裝：pip install beautifulsoup4
 from bs4 import BeautifulSoup
 
 html = """
-<ul>
-  <li class="course">Python 基礎</li>
-  <li class="course">資料分析</li>
-  <li class="course">機器學習</li>
-</ul>
+<h1>本週活動</h1>
+<p>歡迎參加 Python 工作坊。</p>
 """
 
 soup = BeautifulSoup(html, "html.parser")
-for item in soup.find_all("li", class_="course"):
-    print(item.get_text(strip=True))
+title = soup.find("h1")
+print(title.get_text())
 ```
 
-### 預期輸出／結果
+### 預期輸出
+
+```text
+本週活動
+```
+
+### 逐行解釋
+
+這個例子把 HTML 直接寫在程式內，所以不需要連上網。`find("h1")` 找到第一個 `<h1>` 元素；`get_text()` 只取標籤內的人類可讀文字。
+
+第一次使用前，請安裝套件：`pip install beautifulsoup4`。
+
+## 再試一次：例子 2——選出所有課程名稱
+
+```python
+from bs4 import BeautifulSoup
+
+html = """
+<section class="course"><h2>Python 基礎</h2></section>
+<section class="course"><h2>資料分析</h2></section>
+<section class="course"><h2>機器學習</h2></section>
+"""
+
+soup = BeautifulSoup(html, "html.parser")
+for heading in soup.select(".course h2"):
+    print(heading.get_text())
+```
+
+### 預期輸出
 
 ```text
 Python 基礎
@@ -60,75 +77,56 @@ Python 基礎
 機器學習
 ```
 
-### 逐行解釋
-
-`BeautifulSoup(html, "html.parser")` 將 HTML 文字變成可查詢物件。`find_all("li", class_="course")` 找出所有符合條件的 `<li>`，`get_text(strip=True)` 只取文字並移除多餘空白。
-
-## 再試一次：例子 2——取出連結文字和網址
-
-```python
-html = """
-<a class="article" href="/python">Python 文章</a>
-<a class="article" href="/data">資料文章</a>
-"""
-
-soup = BeautifulSoup(html, "html.parser")
-for link in soup.select("a.article"):
-    print(link.get_text(strip=True), "|", link.get("href"))
-```
-
-### 這次改了甚麼？
-
-CSS selector `a.article` 的意思是「class 為 article 的 `<a>` 元素」。`get("href")` 取得連結網址。這段程式沿用例子 1 已匯入的 `BeautifulSoup`。
+`.course h2` 表示「class 為 `course` 的元素內的 `h2`」。這比只寫 `find_all("h2")` 更清楚地表達想取得的是課程卡片內的標題。
 
 ## 易錯位
 
-### ❌ 忘記安裝套件
+### ❌ 以為 Beautiful Soup 自動下載網頁
 
-**原因：** 若出現 `ModuleNotFoundError: No module named 'bs4'`，代表目前 Python 環境沒有 Beautiful Soup。
+Beautiful Soup 的核心工作是解析 HTML，不是處理所有網絡請求。
 
-**修正方法：** 在正確的環境執行 `pip install beautifulsoup4`。
+**✅ 修正：** 先從小型本機 HTML 練習；若要取得公開頁面，先確認是否有官方 API、下載檔和使用條款。
 
-### ❌ 用肉眼看到的文字直接當 selector
+### ❌ 抓到元素就直接印出標籤
 
-**原因：** 畫面文字可能重複，HTML 結構才是較可靠的選取依據。
+直接 `print(title)` 會顯示 `<h1>本週活動</h1>`。
 
-**修正方法：** 先查看 HTML，找出 tag、class 或其他穩定屬性。
+**✅ 修正：** 想取文字時使用 `title.get_text()`。
 
-### ❌ 對網站高速發送大量請求
+### ❌ 忽略資料使用規則
 
-**原因：** 這會加重網站負擔，也可能違反網站規則。
+公開可看不代表可以大量複製、收集個人資料或高速請求。
 
-**修正方法：** 先確認可否使用資料；限制請求頻率，優先使用官方 API 或下載資料集。
+**✅ 修正：** 尊重條款和 `robots.txt`、降低請求頻率、只收集真正需要的非個人資料；不可繞過登入或付費限制。
 
 ## 你來做
 
-### 基礎題
+### 基礎題：取出段落
 
-改寫例子 1 的 HTML，加入一個不是課程的 `<li>`，確保程式不會選到它。
+在例子 1 加入另一個 `<p>`，使用 `find("p")` 顯示它的文字。
 
-### 標準題
+### 標準題：加上連結
 
-建立 3 個 `<a>` 連結，使用 CSS selector 輸出其文字和 `href`。
+在三張 course 卡片加入 `<a>`，使用 selector 取出文字和 `href`。
 
-### 挑戰題
+### 挑戰題：整理為 List of Dictionary
 
-找一個明確提供公開資料下載或 API 的網站，閱讀其使用規則；只寫出你會收集哪些非個人資料，不要立即大量爬取。
+把課程名稱和連結收集成 List，每一項是 `{"name": ..., "url": ...}`。只使用你自己建立的 HTML 範例。
 
 ## 本課小結
 
-1. Beautiful Soup 解析 HTML，讓程式按結構選取資料。
-2. `find_all()` 和 `select()` 可取得多個符合條件的元素。
-3. 合法、節制和尊重私隱比「能否抓到資料」更重要。
+1. HTML 標籤和 class 告訴我們內容的結構。
+2. `find()` 取一個元素，`select()` 可按 selector 取多個元素。
+3. 網頁資料必須合法、節制並尊重私隱和網站規則。
 
 ## 離堂前 3 分鐘
 
-1. `find_all()` 和 `find()` 的主要差異是甚麼？
-2. `get_text(strip=True)` 做了甚麼？
-3. 為甚麼應優先考慮官方 API 或資料下載？
+1. `<h1>` 和 `<p>` 分別通常代表甚麼？
+2. `get_text()` 的作用是甚麼？
+3. 為甚麼要先找 API 或下載檔？
 
 ## 自我檢查
 
-- 我能否從 HTML 找出 tag 和 class？
-- 我能否用 Beautiful Soup 選取文字和連結？
-- 我知道哪些網站資料不應隨意收集嗎？
+- 我能否從簡單 HTML 選出目標文字？
+- 我能否解釋 CSS selector 的用途？
+- 我會否在擷取資料前先確認規則和替代來源？

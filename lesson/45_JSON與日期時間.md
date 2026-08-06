@@ -1,134 +1,138 @@
-# 第 45 課：JSON 與日期時間——讓資料有結構和時間
+# 第 45 課：JSON 與日期時間——讓資料有清楚格式和時間記錄
 
-> **本課主題：用 JSON 保存有結構的資料，並用 `datetime` 處理日期和時間差。**
+> **本課主題：把一筆資料整理成 JSON 文字，並用 ISO 格式記下建立時間。**
+>
+> 當資料要交給另一個程式、網站或日後的自己閱讀時，清楚的欄位和一致的時間格式，比一串隨意文字可靠得多。
 
 ## 今課可以做到甚麼？
 
-完成這一課後，你可以：
-
-- 把 Python 的 Dictionary 和 List 轉成 JSON 檔；
-- 讀取 JSON 資料並取出需要的欄位；
-- 計算兩個日期相差多少日。
+- 把 Dictionary 轉成容易交換的 JSON 文字；
+- 從 JSON 文字讀回 Python 資料；
+- 取得目前時間並使用一致的 ISO 格式顯示。
 
 ## 開始前：想一想
 
-如果要保存一個學生的姓名、班別、分數和興趣，用每行一項的文字檔容易看漏資料。怎樣才能讓資料的結構更清楚？
+同一個活動紀錄若寫成 `「星期五下午三點交」`，下星期或另一個程式能否準確理解？如果每筆紀錄都有 `title`、`done`、`created_at` 等欄位，會不會更容易整理？
 
 ## 新概念
 
-### 1. JSON 是資料交換格式
+### 1. JSON 是資料交換的文字格式
 
-JSON 很常用於網站、設定檔和 API。它和 Python 資料很相似：
+JSON 看起來很像 Python Dictionary，但它是一種文字格式。常見用途包括設定檔、網站 API 回應和資料保存。
 
-- JSON object 對應 Python Dictionary；
-- JSON array 對應 Python List；
-- 文字要用雙引號；
-- JSON 不可以直接保存 Python 的函式或 `datetime` 物件。
+Python 使用 `json.dumps()` 把資料變成 JSON 文字；使用 `json.loads()` 把 JSON 文字讀回 Python 資料。
 
-### 2. 日期不是普通文字
+### 2. 用一致格式記錄時間
 
-`"2026-09-01"` 看起來像日期，但對 Python 而言先只是文字。使用 `datetime.strptime()` 轉成日期物件後，才可可靠地比較和計算相差日數。
+`datetime.now()` 取得目前電腦時間。`isoformat()` 產生如 `2026-08-06T15:30:00` 的一致格式，較適合程式保存和排序。
 
-![JSON 與日期時間——讓資料有結構和時間概念圖](/images/lesson-45-json-datetime.svg)
+![一筆待辦事項包含 title、done 和 created_at；同一筆資料以 JSON 文字保存，再讀回 Python](/images/lesson-45-json-datetime.svg)
 
-## 跟著做：例子 1——保存並讀取學生資料
+## 跟著做：例子 1——建立一筆有時間的 JSON 紀錄
 
 ```python
 import json
-from pathlib import Path
+from datetime import datetime
 
-student = {
-    "name": "小晴",
-    "class": "F4A",
-    "scores": [78, 85, 91]
+record = {
+    "title": "完成 Python 練習",
+    "done": False,
+    "created_at": datetime.now().isoformat(timespec="minutes")
 }
 
-file_path = Path("student.json")
-file_path.write_text(
-    json.dumps(student, ensure_ascii=False, indent=2),
-    encoding="utf-8"
-)
-
-loaded_student = json.loads(file_path.read_text(encoding="utf-8"))
-print(loaded_student["name"])
-print(sum(loaded_student["scores"]) / len(loaded_student["scores"]))
+json_text = json.dumps(record, ensure_ascii=False, indent=2)
+print(json_text)
 ```
 
 ### 預期輸出／結果
 
-```text
-小晴
-84.66666666666667
+時間會因電腦不同而改變，格式如下：
+
+```json
+{
+  "title": "完成 Python 練習",
+  "done": false,
+  "created_at": "2026-08-06T15:30"
+}
 ```
 
 ### 逐行解釋
 
-`json.dumps()` 把 Python 資料轉成 JSON 文字；`ensure_ascii=False` 令中文保持可讀；`indent=2` 令檔案排版整齊。`json.loads()` 則把 JSON 文字還原成 Python Dictionary。
+`record` 是 Python Dictionary。`datetime.now()` 取得現在時間，`timespec="minutes"` 只保留到分鐘，避免畫面出現不必要的秒數。
 
-## 再試一次：例子 2——計算距離活動還有多少日
+`json.dumps()` 的 `ensure_ascii=False` 讓中文保持可讀；`indent=2` 讓每個欄位分行顯示。JSON 中的布林值寫成小寫 `false`，這正是 JSON 和 Python 寫法的其中一個差異。
+
+## 再試一次：例子 2——由 JSON 文字讀回資料
 
 ```python
-from datetime import datetime
+import json
 
-today = datetime.strptime("2026-08-05", "%Y-%m-%d")
-event_day = datetime.strptime("2026-09-01", "%Y-%m-%d")
-difference = event_day - today
+json_text = '{"title": "練習 List", "done": true, "created_at": "2026-08-06T16:00"}'
+record = json.loads(json_text)
 
-print("距離活動還有", difference.days, "日")
+print("事項：", record["title"])
+print("完成了嗎：", record["done"])
+print("建立時間：", record["created_at"])
 ```
 
-### 這次改了甚麼？
+### 預期輸出
 
-`strptime()` 依照指定格式把文字轉成日期時間。兩個日期相減得到 `timedelta`，其 `.days` 屬性就是相差的完整日數。把日期改成自己活動的日期再試一次。
+```text
+事項： 練習 List
+完成了嗎： True
+建立時間： 2026-08-06T16:00
+```
+
+`loads()` 的 s 代表 string。讀回後的 `record` 是 Python Dictionary，所以可用欄位名稱讀取。
 
 ## 易錯位
 
-### ❌ 把 JSON 當成可寫 Python 註解的檔案
+### ❌ 把 Python Dictionary 當成 JSON
 
-**原因：** 標準 JSON 不支援註解，也不接受單引號作為文字引號。
+Python 寫 `True`、`False`、`None`；JSON 寫 `true`、`false`、`null`。
 
-**修正方法：** JSON 檔案使用雙引號，並用 `json.loads()` 檢查格式。
+**✅ 修正：** 不要手動拼長 JSON 文字；先建立 Dictionary，再用 `json.dumps()` 轉換。
 
-### ❌ 日期格式和 `%Y-%m-%d` 不一致
+### ❌ 以為時間字串可以隨意比較
 
-**原因：** 例如 `01/09/2026` 不符合 `2026-09-01` 的格式。
+`"明天下午"` 是給人看的文字，不是清楚的時間資料。
 
-**修正方法：** 把格式字串改成 `%d/%m/%Y`，或統一輸入格式。
+**✅ 修正：** 保存時使用 ISO 格式；顯示給人看時才轉成較自然的文字。
 
-### ❌ 直接比較未轉換的日期文字
+### ❌ 忘記 JSON 文字的雙引號
 
-**原因：** 某些格式的文字排序不代表真正日期先後。
+JSON 的鍵和值（文字）要使用雙引號。
 
-**修正方法：** 先用 `strptime()` 轉成日期物件再比較。
+**✅ 修正：** 讓 `json.dumps()` 負責產生 JSON，較不容易寫錯。
 
 ## 你來做
 
-### 基礎題
+### 基礎題：我的小作品資料
 
-建立包含自己名字、三項興趣和一個目標的 JSON 檔。
+建立一個 Dictionary，包含 `name`、`language`、`finished` 三個欄位，轉成格式化 JSON 顯示。
 
-### 標準題
+### 標準題：加入建立時間
 
-讀取一個 JSON Dictionary，計算其中 `scores` List 的最高分。
+在自己的資料加入 `created_at`，用 `datetime.now().isoformat(timespec="minutes")` 建立。
 
-### 挑戰題
+### 挑戰題：保存成 JSON 檔
 
-讓使用者輸入生日 `YYYY-MM-DD`，計算由生日到一個指定日期相隔多少日。
+把例子 1 的 JSON 文字寫進 `task.json`，再讀回並使用 `json.loads()` 顯示 `title`。提示：第 44 課的 `open()`。
 
 ## 本課小結
 
-1. JSON 適合保存 Dictionary 和 List 形式的結構化資料。
-2. `dumps()`／`loads()` 負責 Python 資料和 JSON 文字之間的轉換。
-3. 日期文字要轉成日期物件，才適合可靠地計算。
+1. JSON 是讓不同程式交換資料的文字格式。
+2. `dumps()` 把 Python 資料轉成 JSON；`loads()` 把 JSON 文字讀回。
+3. ISO 時間格式較一致，適合保存和排序。
 
 ## 離堂前 3 分鐘
 
-1. JSON object 最接近哪一種 Python 資料類型？
-2. `ensure_ascii=False` 在中文 JSON 有甚麼作用？
-3. 兩個 `datetime` 相減後，怎樣取得相差日數？
+1. 為甚麼 JSON 的 `false` 和 Python 的 `False` 不同？
+2. `dumps()` 和 `loads()` 分別做甚麼？
+3. 為甚麼保存時間時應使用一致格式？
 
 ## 自我檢查
 
-- 我能否讀寫一個基本 JSON 檔？
-- 我知道 JSON 和 Python Dictionary 的相同與不同嗎？
-- 我會否先把日期文字轉換再計算？
+- 我能否把 Dictionary 轉成可讀的 JSON 文字？
+- 我能否從 JSON 文字讀回欄位？
+- 我會否把資料保存格式和人類閱讀的文字分開考慮？
