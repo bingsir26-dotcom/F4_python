@@ -49,6 +49,7 @@ export default defineConfig({
         text: '單元二：資料處理與實用解難',
         collapsed: true,
         items: [
+          { text: '開始資料與 AI 課前：執行環境', link: '/資料與AI課程執行環境' },
           { text: '第 12 課：資料從哪裡來？CSV 與分析問題', link: '/12_資料分析第一步' },
           { text: '第 13 課：從 Dictionary 到資料表', link: '/13_從Dictionary到資料表' },
           { text: '第 14 課：pandas 入門——看懂資料表', link: '/14_pandas入門' },

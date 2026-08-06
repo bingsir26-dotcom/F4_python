@@ -14,6 +14,23 @@
 
 如果老師給你一份有 500 位學生的資料表，直接全部印出來，真的容易找到錯誤嗎？
 
+### 本課先執行這一格
+
+每次開啟新的 Notebook／Colab，或重新啟動 Kernel 後，先執行這一格。後面的例子會使用 `scores_df`；若剛開新 Notebook，必須先執行這一格，才執行本課其他程式。
+
+```python
+import pandas as pd
+
+student_data = {
+    "姓名": ["Alex", "Chris", "May", "Sam", "Lily"],
+    "班別": ["F4A", "F4A", "F4B", "F4B", "F4A"],
+    "數學": [78, 65, 91, 72, 84],
+    "英文": [82, 70, 88, 69, 90]
+}
+
+scores_df = pd.DataFrame(student_data)
+```
+
 ### 先猜一猜
 
 以下哪一行最適合回答「這張表有甚麼欄位？」
@@ -27,38 +44,6 @@ print(scores_df["數學"])
 答案是 `scores_df.columns`。它會顯示欄位名稱；三句程式都能看資料，但回答的是不同問題。
 
 ## 新概念
-
-### 本課起始 cell：先執行一次
-
-每次開啟新的 Notebook／Colab，或重新啟動 Kernel 後，先執行這一格。後面的例子會使用 `scores_df`。
-
-```python
-import pandas as pd
-
-student_data = {
-    "姓名": ["Alex", "Chris", "May", "Sam", "Lily"],
-    "班別": ["F4A", "F4A", "F4B", "F4B", "F4A"],
-    "數學": [78, 65, 91, 72, 84],
-    "英文": [82, 70, 88, 69, 90]
-}
-
-scores_df = pd.DataFrame(student_data)
-```
-
-本課沿用一份虛構班級資料：
-
-```python
-import pandas as pd
-
-student_data = {
-    "姓名": ["Alex", "Chris", "May", "Sam", "Lily"],
-    "班別": ["F4A", "F4A", "F4B", "F4B", "F4A"],
-    "數學": [78, 65, 91, 72, 84],
-    "英文": [82, 70, 88, 69, 90]
-}
-
-scores_df = pd.DataFrame(student_data)
-```
 
 ### 1. `head()`：先看前幾筆
 
