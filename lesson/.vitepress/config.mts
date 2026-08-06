@@ -73,7 +73,7 @@ export default defineConfig({
           { text: '第 26 課：模型評估', link: '/26_模型評估' },
           { text: '第 27 課：欠擬合與過擬合', link: '/27_欠擬合與過擬合' },
           { text: '第 28 課：Decision Tree 與 Random Forest', link: '/28_DecisionTree與RandomForest' },
-          { text: '第 29 課：K-Means 與 PCA', link: '/29_KMeans與PCA' },
+          { text: '第 29 課：K-Means——在資料中找群組', link: '/29_KMeans與PCA' },
           { text: '第 30 課：機器學習專題', link: '/30_機器學習專題' }
         ]
       },

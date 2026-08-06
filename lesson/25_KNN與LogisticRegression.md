@@ -1,107 +1,127 @@
-# 第 25 課：KNN 與 Logistic Regression——兩種分類想法
+# 第 25 課：KNN 與 Logistic Regression——同一問題，兩種分類方法
 
-> **本課主題：比較「參考附近例子」與「學習分類機率」兩種常見分類模型。**
+> **本課主題：用同一份資料比較兩種分類模型，理解模型可有不同判斷方式。**
 >
-> 同一份資料可以用不同模型處理。模型沒有永遠最好的一個，重點是知道它依甚麼方式作判斷，並用測試比較結果。
+> 第 24 課的 KNN 會參考附近例子。這一課再認識另一種常用模型 Logistic Regression：它先從整份資料學習一條大致分界，再為新資料選類別。
 
 ## 今課可以做到甚麼？
 
-完成這一課後，你可以：
-
-- 用 KNN 和 Logistic Regression 做相同分類任務；
-- 看懂兩個模型的不同思路；
-- 以相同測試資料公平比較模型。
+- 用同一份氣溫資料訓練兩種分類模型；
+- 為一筆新氣溫取得服裝類別建議；
+- 用自己的話說出 KNN 與 Logistic Regression 的不同想法。
 
 ## 開始前：想一想
 
-新同學加入一班時，你會看他最接近哪幾位同學，還是畫一條規則線把兩群分開？這兩種思路都可成為分類模型。
+同樣要為 21°C 選擇「長袖」或「短袖」，可以有兩種做法：
+
+1. 看看最接近的幾天穿了甚麼；
+2. 先根據全部已知天氣，找出大約在哪個溫度附近應改穿短袖。
+
+兩種方法都可用資料作分類；它們不一定每次得到相同答案。
 
 ## 新概念
 
-### 1. KNN：看附近的例子
+### 1. KNN：預測時看附近例子
 
-KNN 不急於先寫出一條固定公式；它在預測時找最接近的訓練例子，再以多數決分類。資料尺度不同時，距離會受影響。
+KNN（K-Nearest Neighbors）在新資料出現時，找出最接近的 `k` 筆已知資料，再以較多的類別作決定。
 
-### 2. Logistic Regression：估計屬於某類的機率
+### 2. Logistic Regression：先學習大致分界
 
-Logistic Regression 會根據特徵學習分界，並可用 `predict_proba()` 取得各類別的估計機率。機率仍是模型估計，不是保證。
+Logistic Regression 會先從訓練資料學習不同類別的大致分界。它的名稱有「Regression」，但它在這裡是用來做**分類**，不要和第 23 課預測連續數字的線性迴歸混淆。
 
-![兩種分類模型的核心概念：KNN、機率、特徵、比較](/images/lesson-25-knn-logistic.svg)
+![同一組氣溫資料可用 KNN 或 Logistic Regression 作分類](/images/lesson-25-knn-logistic.svg)
 
-## 跟著做：例子 1——以兩個特徵訓練 KNN
+這一課不需要學公式；重點是知道：**同一問題可以嘗試不同模型，但比較時要使用相同資料和相同新問題。**
+
+## 跟著做：例子 1——KNN 看附近的天氣
 
 ```python
 from sklearn.neighbors import KNeighborsClassifier
 
-# [每天練習小時, 完成題目數]
-X = [[0.5, 2], [1.0, 3], [1.5, 4], [2.0, 8], [2.5, 9], [3.0, 10]]
-y = [0, 0, 0, 1, 1, 1]
+# 每一筆輸入是 [氣溫（°C）]
+temperatures = [[12], [15], [18], [23], [26], [30]]
+outfits = ["長袖", "長袖", "長袖", "短袖", "短袖", "短袖"]
+new_temperature = [[21]]
 
 knn = KNeighborsClassifier(n_neighbors=3)
-knn.fit(X, y)
-print(knn.predict([[1.8, 7]]))
+knn.fit(temperatures, outfits)
+
+prediction = knn.predict(new_temperature)
+print("KNN 的建議：", prediction[0])
 ```
 
-### 預期輸出／結果
+### 預期輸出
 
-輸出會是一個預測類別，例如 `[1]`。
+```text
+KNN 的建議： 短袖
+```
 
 ### 逐行解釋
 
-每筆資料現在有兩個特徵，因此新資料也必須寫成 `[[1.8, 7]]`。KNN 會比較這筆資料和訓練資料的距離。
+`temperatures` 和 `outfits` 是同一批已知例子。21°C 附近的三筆資料是 18°C、23°C、26°C，其中兩筆是「短袖」，所以這個 KNN 模型輸出「短袖」。
 
-## 再試一次：例子 2——改用 Logistic Regression
+`new_temperature` 保持 `[[21]]` 的格式：一筆新資料，內有一個特徵。
+
+## 再試一次：例子 2——換成 Logistic Regression
+
+**先執行例子 1**，讓 `temperatures`、`outfits` 和 `new_temperature` 已經存在，再加入以下程式：
 
 ```python
 from sklearn.linear_model import LogisticRegression
 
 logistic = LogisticRegression()
-logistic.fit(X, y)
+logistic.fit(temperatures, outfits)
 
-print(logistic.predict([[1.8, 7]]))
-print(logistic.predict_proba([[1.8, 7]]))
+prediction = logistic.predict(new_temperature)
+print("Logistic Regression 的建議：", prediction[0])
 ```
 
-第一行預測類別；第二行顯示模型估計屬於每個類別的機率。兩個模型對同一筆資料可能相同，也可能不同。
+這次模型會根據整份資料學到的分界作判斷。在這組簡化資料中，兩個模型都輸出「短袖」；換一組資料或換一筆新氣溫，結果有可能不同。
 
 ## 易錯位
 
 ### ❌ 用不同資料比較兩個模型
 
-若 KNN 和 Logistic Regression 使用不同訓練資料或不同測試資料，結果不能公平比較。
+若兩個模型看到的訓練資料不同，或回答的是不同新問題，便不能公平比較。
 
-### ❌ 把機率當成信心保證
+**✅ 修正：** 兩個模型都使用 `temperatures`、`outfits`，並都預測 `new_temperature`。
 
-預測機率高，只表示模型在它看到的資料規律下較傾向某類；訓練資料偏差時，高機率也可能錯。
+### ❌ 以為模型名稱已經說明哪個一定較好
+
+沒有模型在所有問題上永遠最好。要先看問題、資料和測試結果。
+
+### ❌ 把 Logistic Regression 當成預測連續數字
+
+在本課，它輸出的是「長袖／短袖」類別；它不是第 23 課那種預測房價的線性迴歸。
 
 ## 你來做
 
-### 基礎題
+### 基礎題：改變新氣溫
 
-把 KNN 的 `n_neighbors` 改成 1 和 5，觀察同一筆資料結果是否改變。
+把 `[[21]]` 改成 `[[16]]`、`[[24]]` 和 `[[28]]`，比較兩個模型的輸出。
 
-### 標準題
+### 標準題：改變 KNN 的參考數量
 
-改變新資料的兩個特徵，找一筆讓兩個模型預測不同的資料（若有）。
+把 `n_neighbors` 改成 1 和 5。哪一個設定較容易受單一附近例子影響？
 
-### 挑戰題
+### 挑戰題：用一句話比較
 
-用一句話說明 KNN 和 Logistic Regression 的分類想法有甚麼不同。
+完成句子：KNN 在預測時＿＿＿＿；Logistic Regression 在預測前＿＿＿＿。
 
 ## 本課小結
 
-1. KNN 以附近例子作多數判斷；Logistic Regression 學習分類機率與分界。
-2. 比較模型時，要使用同一問題、同一資料和同一評估方法。
-3. 機率是估計，仍須配合測試資料檢查。
+1. 不同模型可以處理同一個分類問題。
+2. KNN 參考附近例子；Logistic Regression 學習整體分界。
+3. 比較模型時，要使用相同資料和相同測試條件。
 
 ## 離堂前 3 分鐘
 
-1. 兩個特徵的新資料要寫成怎樣的結構？
-2. KNN 的 `n_neighbors` 改變了甚麼？
-3. 為甚麼不能只憑一個機率就完全相信模型？
+1. KNN 的 `n_neighbors=3` 是甚麼意思？
+2. Logistic Regression 在本課輸出的是數字還是類別？
+3. 為甚麼兩個模型要回答同一筆新資料才可比較？
 
 ## 自我檢查
 
-- 我能否以同一份資料運行兩種模型？
-- 我能否說出兩種模型的主要差異？
-- 我知道公平比較需要相同測試條件嗎？
+- 我能否用同一份資料運行兩種模型？
+- 我能否說出兩種模型的基本想法？
+- 我會否先測試再判斷哪個模型較合適？
