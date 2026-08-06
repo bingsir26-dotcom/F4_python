@@ -84,7 +84,7 @@ export default defineConfig({
           { text: '第 31 課：Tensor 與 PyTorch', link: '/31_Tensor與PyTorch' },
           { text: '第 32 課：感知器與神經網絡', link: '/32_感知器與神經網絡' },
           { text: '第 33 課：訓練模型', link: '/33_訓練模型' },
-          { text: '第 34 課：訓練技巧', link: '/34_訓練技巧' },
+          { text: '第 34 課：驗證模型——決定何時停止', link: '/34_訓練技巧' },
           { text: '第 35 課：Computer Vision 入門', link: '/35_ComputerVision入門' },
           { text: '第 36 課：視覺進階專題', link: '/36_視覺進階專題' },
           { text: '第 37 課：NLP 入門', link: '/37_NLP入門' },

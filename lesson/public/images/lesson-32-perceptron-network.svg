@@ -1,1 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 350" role="img" aria-labelledby="title desc"><title id="title">感知器與神經網絡——由輸入到判斷概念圖</title><desc id="desc">本課四個核心概念：輸入、權重、偏差、輸出。</desc><rect width="960" height="350" fill="#f8fbff"/><text x="40" y="66" font-family="system-ui,sans-serif" font-size="31" font-weight="700" fill="#1e293b">感知器與神經網絡——由輸入到判斷</text><text x="40" y="104" font-family="system-ui,sans-serif" font-size="20" fill="#64748b">用四個關鍵詞先掌握本課重點</text><rect x="40" y="130" width="190" height="145" rx="20" fill="#dbeafe" stroke="#60a5fa" stroke-width="3"/><text x="65" y="188" font-family="system-ui,sans-serif" font-size="26" font-weight="700" fill="#1e3a8a">1 輸入</text><text x="65" y="235" font-family="system-ui,sans-serif" font-size="18" fill="#475569">本課核心</text><rect x="265" y="130" width="190" height="145" rx="20" fill="#dcfce7" stroke="#4ade80" stroke-width="3"/><text x="290" y="188" font-family="system-ui,sans-serif" font-size="26" font-weight="700" fill="#166534">2 權重</text><text x="290" y="235" font-family="system-ui,sans-serif" font-size="18" fill="#475569">本課核心</text><rect x="490" y="130" width="190" height="145" rx="20" fill="#fef3c7" stroke="#fbbf24" stroke-width="3"/><text x="515" y="188" font-family="system-ui,sans-serif" font-size="26" font-weight="700" fill="#92400e">3 偏差</text><text x="515" y="235" font-family="system-ui,sans-serif" font-size="18" fill="#475569">本課核心</text><rect x="715" y="130" width="190" height="145" rx="20" fill="#fce7f3" stroke="#f472b6" stroke-width="3"/><text x="740" y="188" font-family="system-ui,sans-serif" font-size="26" font-weight="700" fill="#9d174d">4 輸出</text><text x="740" y="235" font-family="system-ui,sans-serif" font-size="18" fill="#475569">本課核心</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" role="img" aria-labelledby="title desc">
+  <title id="title">感知器把兩個特徵算成一個分數</title>
+  <desc id="desc">兩個水果圖片特徵配上權重，加上偏差後得到 0.64 的模型分數。</desc>
+  <rect width="960" height="500" fill="#f8fbff"/>
+  <text x="46" y="58" font-family="system-ui,sans-serif" font-size="30" font-weight="700" fill="#172554">感知器：特徵、權重和偏差的加權計算</text>
+  <text x="46" y="94" font-family="system-ui,sans-serif" font-size="18" fill="#475569">這個分數只是模型計算結果；未經訓練，不能直接當成事實。</text>
+  <rect x="42" y="130" width="230" height="300" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="70" y="172" font-family="system-ui,sans-serif" font-size="20" font-weight="700" fill="#1e3a8a">1 輸入特徵</text>
+  <rect x="70" y="210" width="174" height="65" rx="12" fill="#dbeafe"/><text x="87" y="238" font-family="system-ui,sans-serif" font-size="16" fill="#1e40af">紅色程度</text><text x="201" y="252" font-family="monospace" font-size="21" font-weight="700" fill="#1e3a8a">0.9</text>
+  <rect x="70" y="292" width="174" height="65" rx="12" fill="#dcfce7"/><text x="87" y="320" font-family="system-ui,sans-serif" font-size="16" fill="#166534">圓形程度</text><text x="201" y="334" font-family="monospace" font-size="21" font-weight="700" fill="#166534">0.8</text>
+  <text x="70" y="397" font-family="system-ui,sans-serif" font-size="15" fill="#64748b">來自圖片的數值特徵</text>
+  <rect x="307" y="130" width="340" height="300" rx="20" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
+  <text x="338" y="172" font-family="system-ui,sans-serif" font-size="20" font-weight="700" fill="#9a3412">2 加權計算</text>
+  <text x="338" y="223" font-family="monospace" font-size="19" fill="#334155">0.9 × 1.2</text><text x="338" y="258" font-family="monospace" font-size="19" fill="#334155">+ 0.8 × 0.7</text><text x="338" y="293" font-family="monospace" font-size="19" fill="#334155">− 1.0（偏差）</text>
+  <line x1="338" y1="318" x2="616" y2="318" stroke="#c2410c" stroke-width="2"/>
+  <text x="338" y="362" font-family="system-ui,sans-serif" font-size="17" fill="#7c2d12">權重表示目前計算中的影響</text>
+  <text x="338" y="390" font-family="system-ui,sans-serif" font-size="17" fill="#7c2d12">偏差讓分數不必由 0 開始</text>
+  <rect x="682" y="130" width="236" height="300" rx="20" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="2"/>
+  <text x="714" y="172" font-family="system-ui,sans-serif" font-size="20" font-weight="700" fill="#5b21b6">3 輸出分數</text>
+  <text x="714" y="252" font-family="monospace" font-size="32" font-weight="700" fill="#6d28d9">0.64</text>
+  <text x="714" y="309" font-family="system-ui,sans-serif" font-size="16" fill="#475569">這不是答案本身</text>
+  <text x="714" y="338" font-family="system-ui,sans-serif" font-size="16" fill="#475569">還要訓練、測試和</text>
+  <text x="714" y="364" font-family="system-ui,sans-serif" font-size="16" fill="#475569">設定如何解讀。</text>
+</svg>
