@@ -93,7 +93,7 @@ student_data = {
 
 每一欄都必須有同樣數量的資料，這樣 pandas 才知道哪一個姓名、班別和分數屬於同一位同學。
 
-> **課堂環境提醒：** 本單元的程式可在 Jupyter Notebook 或 Google Colab 的 Code cell 執行。第一次使用 pandas 時，如果電腦顯示 `ModuleNotFoundError`，代表目前的 Python 環境尚未安裝 pandas；不要自行亂改程式碼，先告訴老師或使用課堂指定的環境。
+> **課堂環境提醒：** 本單元建議在 Google Colab 的程式格（Code cell）執行。第一次使用資料分析程式前，請先完成[資料與 AI 課程執行環境](/資料與AI課程執行環境)頁的檢查；若出現 `ModuleNotFoundError`，先確認是否開啟課堂指定的 Notebook。
 
 ## 跟著做：例子 1——建立第一張成績表
 

@@ -35,6 +35,23 @@ scores_df["數學"].min()
 
 ## 新概念
 
+### 本課起始 cell：先執行一次
+
+若剛開啟新的 Notebook／Colab，先執行這一格。後面的統計和分組例子都會使用 `scores_df`。
+
+```python
+import pandas as pd
+
+student_data = {
+    "姓名": ["Alex", "Chris", "May", "Sam", "Lily", "Ken"],
+    "班別": ["F4A", "F4A", "F4B", "F4B", "F4A", "F4B"],
+    "數學": [78, 65, 91, 72, 84, 60],
+    "英文": [82, 70, 88, 69, 90, 74]
+}
+
+scores_df = pd.DataFrame(student_data)
+```
+
 ### 1. 四個常用統計數字
 
 ```python
@@ -112,6 +129,8 @@ scores_df["數學"]
 再對這一欄計算平均值。`max()` 和 `min()` 的寫法相同，只是問不同問題。
 
 ## 再試一次：例子 2——比較兩班數學平均分
+
+先確認已執行本課起始 cell 或例子 1，令 `scores_df` 已建立。
 
 ```python
 class_math_mean = scores_df.groupby("班別")["數學"].mean()

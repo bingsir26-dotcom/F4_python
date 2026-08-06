@@ -116,9 +116,11 @@ plt.show()
 
 ## 再試一次：例子 2——改成觀察每天的變化
 
-只把圖表函式和資料意義改掉：
+只把圖表函式和資料意義改掉。以下版本包含載入畫圖工具，可由第一行單獨執行：
 
 ```python
+import matplotlib.pyplot as plt
+
 days = ["Mon", "Tue", "Wed", "Thu", "Fri"]
 reading_minutes = [20, 35, 30, 50, 45]
 

@@ -37,7 +37,7 @@ Alex,F4A,78,82
 Chris,F4A,65,70
 ```
 
-在實際課堂中，先把 CSV 檔下載或上傳到你的 Jupyter／Colab 工作資料夾。本課示例檔可從網站下載：[scores.csv](/data/scores.csv)。
+在實際課堂中，先把 CSV 檔下載或上傳到你的 Jupyter／Colab 工作資料夾。本課示例檔可從網站下載：[scores.csv](/data/scores.csv)。若你使用 Google Colab，請先看[資料與 AI 課程執行環境](/資料與AI課程執行環境)中的「上傳 CSV」步驟；成功上傳後，程式才能找到檔案。
 
 ### 2. `pd.read_csv()`：讀取資料表
 
@@ -68,7 +68,7 @@ print(scores_df.shape)
 
 ## 跟著做：例子 1——讀取成績 CSV
 
-先下載並放好 [scores.csv](/data/scores.csv)，再執行：
+先下載 [scores.csv](/data/scores.csv)，並上傳到目前的 Colab／Notebook 工作資料夾，再執行：
 
 ```python
 import pandas as pd
