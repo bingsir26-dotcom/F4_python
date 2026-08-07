@@ -51,7 +51,14 @@ print(title.get_text())
 
 這個例子把 HTML 直接寫在程式內，所以不需要連上網。`find("h1")` 找到第一個 `<h1>` 元素；`get_text()` 只取標籤內的人類可讀文字。
 
-第一次使用前，請安裝套件：`pip install beautifulsoup4`。
+第一次使用前，請按你正在使用的環境安裝套件：
+
+| 環境 | 安裝方式 |
+| --- | --- |
+| Google Colab 的程式格 | `!pip install beautifulsoup4` |
+| VS Code 終端機／PowerShell | `pip install beautifulsoup4` |
+
+安裝指令不是 Python 語法；在 Colab 要在前面加上 `!`，在終端機則不要加。
 
 ## 再試一次：例子 2——選出所有課程名稱
 

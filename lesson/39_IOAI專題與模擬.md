@@ -1,26 +1,30 @@
 # 第 39 課：IOAI 專題與模擬——公平比較、記錄和報告
 
-> **本課主題：用同一份資料比較兩個模型設定，並完成一份可以重現和解釋的小型 AI 實驗報告。**
+> **本課主題：把資料分成訓練、驗證和最後測試三部分，完成一份可以重現和解釋的小型 AI 實驗報告。**
 >
 > IOAI 風格的解難不只追求一個最高分。你還要說清楚問題、資料、方法、比較條件、錯誤和限制，讓別人可以重做你的實驗。
 
 ## 今課可以做到甚麼？
 
 - 設計只改一項主要設定的公平比較；
-- 用相同資料分割實際比較兩個 KNN 設定；
-- 保存實驗結果，找出較高分設定並寫出不能由分數得出的結論。
+- 用**驗證資料**比較兩個 KNN 設定；
+- 選定設定後，只用一次保留的**測試資料**作最後檢查。
 
 ## 開始前：想一想
 
 模型 A 的準確率是 0.947，模型 B 是 0.953。只看這兩個數字，能否斷言 B 一定較好？
 
-還要問：兩者是否看過相同的訓練資料？測試集是否相同？錯誤是哪一類？如果換一次資料分割，結果仍然相同嗎？
+還要問：兩者是否看過相同的訓練資料？選擇設定時有沒有偷看最後測試集？錯誤是哪一類？如果換一次資料分割，結果仍然相同嗎？
 
 ## 新概念
 
-### 1. 公平實驗：一次只改一個主要設定
+### 1. 三份資料，各有不同工作
 
-若比較 KNN 的 `k=1` 和 `k=5`，資料、訓練／測試分割、評估方法和 random seed 應保持相同。這樣結果不同時，才較容易知道差異可能來自 `k`。
+- **訓練集（train）**：讓模型學習；
+- **驗證集（validation）**：比較設定，例如 KNN 的 `k=1` 或 `k=5`；
+- **測試集（test）**：選好設定後才使用一次，作最後總結。
+
+若在每次調整時都看測試分數，測試集會逐漸變成練習題，最後的分數便不再是真正的未知資料檢查。
 
 ### 2. 一份完整記錄要包含甚麼
 
@@ -29,12 +33,12 @@
 1. 問題和資料集；
 2. 資料怎樣分割；
 3. 模型和改動的設定；
-4. 測試指標和錯誤例子；
+4. 驗證結果、最後測試結果和錯誤例子；
 5. 限制和下一步。
 
-![以同一份鳶尾花資料比較兩個 KNN 設定，並保存成可重現的實驗記錄](/images/lesson-39-ioai-project.svg)
+![鳶尾花資料先分成訓練、驗證和最後測試；先用驗證資料比較 KNN 設定，最後才用測試資料總結](/images/lesson-39-ioai-project.svg)
 
-## 跟著做：例子 1——用相同測試資料比較兩個 KNN 設定
+## 跟著做：例子 1——用驗證資料比較兩個 KNN 設定
 
 ```python
 from sklearn.datasets import load_iris
@@ -43,7 +47,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 
 iris = load_iris()
-X_train, X_test, y_train, y_test = train_test_split(
+X_train_val, X_test, y_train_val, y_test = train_test_split(
     iris.data,
     iris.target,
     test_size=0.25,
@@ -51,17 +55,24 @@ X_train, X_test, y_train, y_test = train_test_split(
     stratify=iris.target
 )
 
+X_train, X_val, y_train, y_val = train_test_split(
+    X_train_val,
+    y_train_val,
+    test_size=1 / 3,
+    random_state=12,
+    stratify=y_train_val
+)
+
 experiments = []
 for k in [1, 5]:
     model = KNeighborsClassifier(n_neighbors=k)
     model.fit(X_train, y_train)
-    prediction = model.predict(X_test)
-    score = accuracy_score(y_test, prediction)
+    validation_score = accuracy_score(y_val, model.predict(X_val))
 
     experiments.append({
         "model": "KNN",
         "setting": f"k={k}",
-        "accuracy": round(score, 3),
+        "validation_accuracy": round(validation_score, 3),
         "random_state": 12
     })
 
@@ -71,29 +82,36 @@ for experiment in experiments:
 
 ### 預期輸出／結果
 
-你會看到兩筆 Dictionary。兩次實驗都使用同一個資料分割，只有 `k` 改變；測試準確率可能不同。
+你會看到兩筆 Dictionary。兩次實驗的訓練資料、驗證資料和 random seed 都相同，只有 `k` 改變。
 
-這裡的 `random_state=12` 不是讓模型一定正確，而是固定資料怎樣分割，令比較條件一致。
+第一個 `train_test_split()` 把資料分成 75% 的「訓練＋驗證資料」和 25% 的最後測試資料；第二個再從前者分出訓練和驗證資料。因此本例約有 50% train、25% validation、25% test。
 
 ### 逐行解釋
 
-`experiments` 是用來保存記錄的 List。每次迴圈建立一個 KNN、用相同 `X_train` 和 `X_test` 計算準確率，再把設定和結果保存成 Dictionary。
+`X_test` 和 `y_test` 在例子 1 **完全沒有參與比較**。`experiments` 保存的是每個 `k` 在驗證集的結果，所以我們是在驗證集而不是測試集選設定。
 
-這種寫法把「實驗」和「報告資料」放在同一個流程中，日後可再加入模型名稱、執行時間、錯誤類別等欄位。
+`random_state=12` 不是讓模型一定正確，而是固定資料怎樣分割，令比較條件一致。
 
-## 再試一次：例子 2——找出較高分設定，但不誇大結果
+## 再試一次：例子 2——選定設定後，才作一次最後測試
 
 **先執行例子 1**，再加入以下程式：
 
 ```python
-best = max(experiments, key=lambda item: item["accuracy"])
+best = max(experiments, key=lambda item: item["validation_accuracy"])
+selected_k = int(best["setting"].split("=")[1])
 
-print("這次測試中較高分：", best["setting"])
-print("準確率：", best["accuracy"])
-print("注意：這只代表這次資料分割，不代表永遠最好。")
+final_model = KNeighborsClassifier(n_neighbors=selected_k)
+final_model.fit(X_train_val, y_train_val)
+final_test_score = accuracy_score(y_test, final_model.predict(X_test))
+
+print("驗證集較高分設定：", best["setting"])
+print("最後一次測試準確率：", round(final_test_score, 3))
+print("注意：測試分數只用來總結，不再用來換另一個 k。")
 ```
 
-`max(..., key=...)` 只是幫我們從記錄中找出最高值。真正報告仍要列出全部實驗、資料限制和錯誤類型，不能只留下勝出的那一筆。
+`max(..., key=...)` 只從**驗證結果**選出這次較高分的設定。選定 `k` 後，模型可重新使用全部 `X_train_val` 學習；最後才在一直保留的 `X_test` 做一次測試。
+
+若兩個設定同分，`max()` 會保留先出現的一個。本課要學的是資料分工，不是把 0.001 的差異說成永久勝負。
 
 ## 易錯位
 
@@ -107,7 +125,7 @@ print("注意：這只代表這次資料分割，不代表永遠最好。")
 
 若每次都看測試分數再改模型，測試集便逐漸變成練習題。
 
-**✅ 修正：** 用驗證集選設定，最後才用測試集作總結；第 34 課已介紹這個分工。
+**✅ 修正：** 用驗證集選設定，最後才用測試集作一次總結；第 34 課已介紹這個分工。
 
 ### ❌ 只報告最高分
 
@@ -121,30 +139,30 @@ print("注意：這只代表這次資料分割，不代表永遠最好。")
 
 ### 基礎題：增加一個設定
 
-把 `k=3` 加入實驗列表，保存三筆結果並比較。
+把 `k=3` 加入實驗列表，保存三筆**驗證集**結果並比較。
 
 ### 標準題：補充報告欄位
 
-在 Dictionary 加入 `"data": "iris"` 和 `"test_size": 0.25`，讓別人更容易重現你的實驗。
+在 Dictionary 加入 `"data": "iris"`、`"train_size"` 和 `"validation_size"`，讓別人更容易重現你的實驗。
 
 ### 挑戰題：完成一頁 IOAI 風格摘要
 
-寫出問題、資料、方法、全部實驗結果、限制和下一步。不要只寫「準確率最高，所以模型最好」。
+寫出問題、資料分割、方法、全部驗證結果、最後測試結果、限制和下一步。不要只寫「準確率最高，所以模型最好」。
 
 ## 本課小結
 
-1. 公平實驗要保持大部分條件相同，一次只改一個主要設定。
-2. 實驗記錄讓結果可以重做、比較和解釋。
+1. train 用來學習，validation 用來選設定，test 留到最後一次檢查。
+2. 公平實驗要保持大部分條件相同，一次只改一個主要設定。
 3. 最高準確率只是一次觀察，必須連同錯誤、資料和限制一起報告。
 
 ## 離堂前 3 分鐘
 
-1. 比較兩個模型時，為甚麼要使用相同測試資料？
+1. 為甚麼不能用測試集選擇 `k`？
 2. `random_state` 在本例的作用是甚麼？
-3. 為甚麼報告不能只保留最高分的實驗？
+3. 選定 `k` 後，最後測試集可以用多少次？
 
 ## 自我檢查
 
+- 我能否分辨 train、validation 和 test 的工作？
 - 我能否設計只改一項設定的比較？
-- 我會否記錄資料分割、模型設定和測試方法？
 - 我能否在結論中寫出結果的限制，而不是誇大模型能力？

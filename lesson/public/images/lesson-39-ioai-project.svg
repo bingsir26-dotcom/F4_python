@@ -1,20 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" role="img" aria-labelledby="title desc">
-  <title id="title">公平比較兩個 KNN 實驗設定</title>
-  <desc id="desc">同一份鳶尾花資料、同一個 random state 和測試集，比較 k 一和 k 五的 KNN，並記錄結果和限制。</desc>
-  <rect width="960" height="500" fill="#f8fbff"/>
-  <text x="44" y="58" font-family="system-ui,sans-serif" font-size="30" font-weight="700" fill="#172554">IOAI 專題：比較要公平，記錄要可重現</text>
-  <text x="44" y="94" font-family="system-ui,sans-serif" font-size="18" fill="#475569">資料分割和評估方法固定，只改一個主要設定，結果才有較清楚的比較意義。</text>
-  <rect x="42" y="130" width="270" height="300" rx="20" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
-  <text x="72" y="170" font-family="system-ui,sans-serif" font-size="20" font-weight="700" fill="#1e3a8a">固定的比較條件</text>
-  <g font-family="system-ui,sans-serif" font-size="17" fill="#334155"><text x="75" y="221">資料：Iris</text><text x="75" y="260">test size：0.25</text><text x="75" y="299">random state：12</text><text x="75" y="338">評估：accuracy</text></g>
-  <text x="75" y="395" font-family="system-ui,sans-serif" font-size="15" fill="#1d4ed8">兩次實驗保持相同</text>
-  <rect x="350" y="130" width="282" height="300" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
-  <text x="380" y="170" font-family="system-ui,sans-serif" font-size="20" font-weight="700" fill="#334155">只改一個設定</text>
-  <rect x="381" y="211" width="220" height="62" rx="12" fill="#dcfce7"/><text x="407" y="249" font-family="system-ui,sans-serif" font-size="19" font-weight="700" fill="#166534">實驗 1　KNN k = 1</text>
-  <rect x="381" y="303" width="220" height="62" rx="12" fill="#fef3c7"/><text x="407" y="341" font-family="system-ui,sans-serif" font-size="19" font-weight="700" fill="#92400e">實驗 2　KNN k = 5</text>
-  <text x="381" y="402" font-family="system-ui,sans-serif" font-size="15" fill="#64748b">不是同時換模型、資料和 k。</text>
-  <rect x="670" y="130" width="248" height="300" rx="20" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
-  <text x="700" y="170" font-family="system-ui,sans-serif" font-size="20" font-weight="700" fill="#9a3412">報告不只最高分</text>
-  <g font-family="system-ui,sans-serif" font-size="17" fill="#7c2d12"><text x="700" y="221">1　全部設定和結果</text><text x="700" y="260">2　錯誤例子</text><text x="700" y="299">3　資料限制</text><text x="700" y="338">4　下一步</text></g>
-  <text x="700" y="399" font-family="system-ui,sans-serif" font-size="15" fill="#c2410c">一次結果不等於永遠最好。</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">IOAI 小型實驗：訓練、驗證與最後測試</title>
+  <desc id="desc">同一份鳶尾花資料以同一 random state 分成訓練、驗證和測試。先以 validation 比較 k 等於 1 和 5，選定設定後才以 test 作最後總結。</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0f9ff"/><stop offset="1" stop-color="#f0fdf4"/></linearGradient><filter id="shadow" x="-15%" y="-20%" width="130%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#0f4c5c" flood-opacity=".13"/></filter></defs>
+  <rect width="1200" height="620" rx="34" fill="url(#bg)"/><circle cx="92" cy="72" r="140" fill="#bae6fd" opacity=".44"/><circle cx="1134" cy="572" r="162" fill="#bbf7d0" opacity=".5"/>
+  <text x="600" y="68" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="39" font-weight="700" fill="#123f43">IOAI 小型實驗：公平比較，最後才測試</text>
+  <text x="600" y="110" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="22" fill="#365c58">固定資料分割和 random state，才知道比較的是模型設定，而不是剛好抽到的資料。</text>
+  <g filter="url(#shadow)">
+    <rect x="55" y="165" width="330" height="275" rx="24" fill="#fff" stroke="#2563eb" stroke-width="4"/><circle cx="100" cy="210" r="24" fill="#2563eb"/><text x="100" y="218" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#fff">1</text>
+    <text x="220" y="218" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="25" font-weight="700" fill="#123f43">資料分成三份</text><text x="90" y="283" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="20" fill="#1d4ed8">train：約 50%</text><text x="90" y="321" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="20" fill="#0f766e">validation：約 25%</text><text x="90" y="359" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="20" fill="#b45309">test：約 25%</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="435" y="165" width="330" height="275" rx="24" fill="#fff" stroke="#0f9f8c" stroke-width="4"/><circle cx="480" cy="210" r="24" fill="#0f9f8c"/><text x="480" y="218" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#fff">2</text>
+    <text x="600" y="218" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="25" font-weight="700" fill="#123f43">用 validation 比較</text><text x="600" y="288" text-anchor="middle" font-family="Consolas,'Courier New',monospace" font-size="22" fill="#0f766e">KNN: k = 1</text><text x="600" y="324" text-anchor="middle" font-family="Consolas,'Courier New',monospace" font-size="22" fill="#0f766e">KNN: k = 5</text><text x="600" y="385" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="19" fill="#365c58">只改一項設定，記錄 validation accuracy</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="815" y="165" width="330" height="275" rx="24" fill="#fff" stroke="#d78b1c" stroke-width="4"/><circle cx="860" cy="210" r="24" fill="#d78b1c"/><text x="860" y="218" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#fff">3</text>
+    <text x="980" y="218" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="25" font-weight="700" fill="#123f43">最後一次 test</text><text x="980" y="288" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="20" fill="#b45309">選好 k 後才測試</text><text x="980" y="328" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="20" fill="#b45309">報告 accuracy 和限制</text><text x="980" y="385" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="19" fill="#365c58">不是再用 test 選另一個 k</text>
+  </g>
+  <g filter="url(#shadow)"><rect x="170" y="490" width="860" height="72" rx="20" fill="#123f43"/><text x="600" y="535" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="22" font-weight="700" fill="#fff">完整報告還要記錄：資料集、random state、設定、錯誤例子、限制和下一步。</text></g>
 </svg>

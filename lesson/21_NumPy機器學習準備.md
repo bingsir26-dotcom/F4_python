@@ -6,13 +6,13 @@
 
 ## 今課可以做到甚麼？
 
-- 把一組分數或遊戲金幣放入 NumPy array；
-- 一次替整組數字加分、乘倍或比較是否達標；
+- 把一組遊戲金幣放入 NumPy array；
+- 一次替整組數字加上獎勵、乘倍或比較是否達標；
 - 計算平均值，快速讀出整組數字的結果。
 
 ## 開始前：想一想
 
-遊戲更新後，三位玩家都獲得 5 枚金幣。若資料放在 List 內，以下程式會得到甚麼？
+遊戲更新後，三個角色都獲得 5 枚金幣。若資料放在 List 內，以下程式會得到甚麼？
 
 ```python
 gold = [10, 20, 30]
@@ -25,7 +25,7 @@ print(gold + [5])
 [10, 20, 30, 5]
 ```
 
-這是把另一個 List 接在最後，不是替每位玩家加 5。
+這是把另一個 List 接在最後，不是替每個角色加 5。
 
 那麼，怎樣才可以把「加 5」同時套用到每個數字？
 
@@ -41,7 +41,7 @@ gold = np.array([10, 20, 30])
 
 `np.array(...)` 建立 NumPy 的數字陣列（array）。它看起來像 List，但特別擅長處理數字。
 
-![一組數字經過同一運算後得到一組新數字](/images/lesson-21-numpy-array.svg)
+![一組金幣數字經過同一運算後得到一組新數字](/images/lesson-21-numpy-array.svg)
 
 ### 2. 同一個運算會套用到每一個數字
 
@@ -57,15 +57,15 @@ gold >= 20
 
 pandas 適合有欄位名稱的表格；NumPy array 適合直接對大量數字計算。它不是 AI，但很多資料分析和機器學習程式都會用到這種數字陣列。
 
-## 跟著做：例子 1——替所有分數加 5 分
+## 跟著做：例子 1——替所有金幣加上獎勵
 
 ```python
 import numpy as np
 
-scores = np.array([78, 65, 91])
-new_scores = scores + 5
+gold = np.array([78, 65, 91])
+bonus_gold = gold + 5
 
-print(new_scores)
+print(bonus_gold)
 ```
 
 ### 預期輸出
@@ -83,56 +83,56 @@ import numpy as np
 載入 NumPy，並把較長的名稱 `numpy` 簡寫成 `np`。
 
 ```python
-scores = np.array([78, 65, 91])
+gold = np.array([78, 65, 91])
 ```
 
-建立一組三人的分數。
+建立一組三個角色獲得的金幣。
 
 ```python
-new_scores = scores + 5
+bonus_gold = gold + 5
 ```
 
-把 array 內的每個數字加 5，結果保存到新的變數 `new_scores`。原本的 `scores` 仍然是 `[78 65 91]`。
+把 array 內的每個數字加 5，結果保存到新的變數 `bonus_gold`。原本的 `gold` 仍然是 `[78 65 91]`。
 
 ```python
-print(new_scores)
+print(bonus_gold)
 ```
 
-顯示新的整組分數。
+顯示新的整組金幣。
 
-## 再試一次：例子 2——找出及格人數和平均分
+## 再試一次：例子 2——找出達標回合數和平均金幣
 
-這是一段**可獨立執行**的程式。留意 `scores >= 60` 會產生一組 True／False，而 `.sum()` 可以把當中的 `True` 數量加起來。
+這是一段**可獨立執行**的程式。留意 `gold >= 60` 會產生一組 True／False，而 `.sum()` 可以把當中的 `True` 數量加起來。
 
 ```python
 import numpy as np
 
-scores = np.array([78, 52, 91, 60, 45])
-passed = scores >= 60
-pass_count = passed.sum()
-average_score = scores.mean()
+gold = np.array([78, 52, 91, 60, 45])
+reached_target = gold >= 60
+target_count = reached_target.sum()
+average_gold = gold.mean()
 
-print(passed)
-print("及格人數：", pass_count)
-print("平均分：", average_score)
+print(reached_target)
+print("達標回合數：", target_count)
+print("平均金幣：", average_gold)
 ```
 
 ### 預期輸出
 
 ```text
 [ True False  True  True False]
-及格人數： 3
-平均分： 65.2
+達標回合數： 3
+平均金幣： 65.2
 ```
 
-`passed` 保存的不是分數，而是一組比較結果。第一、三、四個分數達到 60，所以有三個 `True`。
+`reached_target` 保存的不是金幣，而是一組比較結果。第一、三、四個數字達到 60，所以有三個 `True`。
 
 ## 易錯位
 
 ### ❌ 忘記載入 NumPy
 
 ```python
-scores = np.array([78, 65, 91])
+gold = np.array([78, 65, 91])
 ```
 
 **原因：** Python 尚未知道 `np` 是甚麼。
@@ -146,8 +146,8 @@ import numpy as np
 ### ❌ 把 List 當成 NumPy array
 
 ```python
-scores = [78, 65, 91]
-print(scores + 5)
+gold = [78, 65, 91]
+print(gold + 5)
 ```
 
 **原因：** 普通 List 的 `+` 不是逐個數字相加。
@@ -155,14 +155,14 @@ print(scores + 5)
 **✅ 修正：**
 
 ```python
-scores = np.array([78, 65, 91])
-print(scores + 5)
+gold = np.array([78, 65, 91])
+print(gold + 5)
 ```
 
 ### ❌ 把 `mean` 寫成沒有括號
 
 ```python
-print(scores.mean)
+print(gold.mean)
 ```
 
 **原因：** `mean` 是計算平均值的功能；要加上 `()` 才會執行。
@@ -170,22 +170,22 @@ print(scores.mean)
 **✅ 修正：**
 
 ```python
-print(scores.mean())
+print(gold.mean())
 ```
 
 ## 你來做
 
 ### 基礎題：遊戲金幣更新
 
-建立 `gold = np.array([10, 25, 40])`，替所有玩家加上 20 枚金幣。
+建立 `gold = np.array([10, 25, 40])`，替所有角色加上 20 枚金幣。
 
-### 標準題：成績加分
+### 標準題：金幣獎勵
 
-建立至少四個分數的 array，替每個分數加 3 分，然後顯示新平均值。
+建立至少四個金幣數字的 array，替每個數字加 3，然後顯示新平均值。
 
 ### 挑戰題：達標統計
 
-建立至少五個數字，設定一個達標線，例如 `scores >= 70`。顯示比較結果和達標數量。
+建立至少五個數字，設定一個達標線，例如 `gold >= 70`。顯示比較結果和達標數量。
 
 ## 本課小結
 
@@ -196,8 +196,8 @@ print(scores.mean())
 ## 離堂前 3 分鐘
 
 1. `np.array([1, 2, 3]) * 10` 會得到甚麼？
-2. `scores >= 60` 會產生數字還是 True／False？
-3. `scores.mean()` 計算的是甚麼？
+2. `gold >= 60` 會產生數字還是 True／False？
+3. `gold.mean()` 計算的是甚麼？
 
 ## 自我檢查
 

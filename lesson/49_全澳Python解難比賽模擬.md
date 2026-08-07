@@ -12,7 +12,7 @@
 
 ## 開始前：想一想
 
-題目給你一串分數，要求輸出及格人數和最高分。第一步應是立刻寫 `for`，還是先確認：第一行輸入甚麼、第二行有多少數字、空資料會不會出現、輸出需要哪一種格式？
+題目給你多回合的遊戲金幣數，要求輸出「達到 60 金幣的回合數」和「最高金幣數」。第一步應是立刻寫 `for`，還是先確認：第一行輸入甚麼、之後有多少行數字、輸出需要哪一種格式？
 
 ## 新概念
 
@@ -26,29 +26,32 @@
 
 ### 2. 先讓每個變數有明確職責
 
-本題中：`scores` 保存全部分數；`pass_count` 負責計數；`highest` 保存目前最高分。變數愈清楚，越容易對照題目檢查。
+本題中：`gold_values` 保存全部回合的金幣數；`target_count` 負責計數；`highest_gold` 保存目前最高值。變數愈清楚，越容易對照題目檢查。
 
-![題目轉成 IPO 記錄卡：讀取數量和分數；逐項計數與比較最高分；輸出兩個答案和測試結果](/images/lesson-49-contest-simulation.svg)
+![題目轉成 IPO 記錄卡：讀取回合數和金幣；逐項計數與比較最高金幣；輸出兩個答案並測試邊界資料](/images/lesson-49-contest-simulation.svg)
 
-## 跟著做：例子 1——讀取分數並輸出兩個統計結果
+## 跟著做：例子 1——讀取 n 回合金幣並輸出兩個統計結果
 
-**題目：** 第一行輸入整數 `n`；第二行輸入 `n` 個以空格分隔的整數分數。輸出及格（60 分或以上）人數，再輸出最高分。保證 `n >= 1`。
+**題目：** 第一行輸入整數 `n`；之後有 `n` 行，每行輸入一個整數，代表一回合得到的金幣數。輸出金幣數不少於 60 的回合數，再輸出最高金幣數。保證 `n >= 1`。
 
 ```python
 n = int(input())
-scores = list(map(int, input().split()))
+gold_values = []
 
-pass_count = 0
-highest = scores[0]
+for _ in range(n):
+    gold_values.append(int(input()))
 
-for score in scores:
-    if score >= 60:
-        pass_count = pass_count + 1
-    if score > highest:
-        highest = score
+target_count = 0
+highest_gold = gold_values[0]
 
-print(pass_count)
-print(highest)
+for gold in gold_values:
+    if gold >= 60:
+        target_count = target_count + 1
+    if gold > highest_gold:
+        highest_gold = gold
+
+print(target_count)
+print(highest_gold)
 ```
 
 ### 預期輸入與輸出
@@ -57,7 +60,11 @@ print(highest)
 
 ```text
 5
-55 72 88 49 60
+55
+72
+88
+49
+60
 ```
 
 輸出：
@@ -69,32 +76,30 @@ print(highest)
 
 ### 逐行解釋
 
-`input().split()` 先把第二行按空格拆開；`map(int, ...)` 把每段文字轉成整數；最外面的 `list()` 收集全部分數。
+`n` 是回合數。`for _ in range(n):` 剛好讀取 `n` 次輸入；`_` 表示「這次只需要重複，不需要使用回合編號」。因此 `n` 不只是裝飾，而是題目規格的一部分。
 
-因題目保證至少有一個分數，所以可用 `scores[0]` 作為 `highest` 的初始值。迴圈內有兩個獨立檢查：一個負責及格人數，另一個負責更新最高分。
-
-這題的 `n` 也可用來檢查資料數目是否符合題意：`len(scores)` 應等於 `n`。
+因題目保證至少有一個金幣數，所以可用 `gold_values[0]` 作為 `highest_gold` 的初始值。第二個迴圈有兩個獨立檢查：一個負責達標回合數，另一個負責更新最高值。
 
 ## 再試一次：例子 2——先用函式做離線測試
 
 在交到評測系統前，可先用不用 `input()` 的函式測試核心規則：
 
 ```python
-def summarize_scores(scores):
-    pass_count = 0
-    highest = scores[0]
+def summarize_gold(gold_values):
+    target_count = 0
+    highest_gold = gold_values[0]
 
-    for score in scores:
-        if score >= 60:
-            pass_count = pass_count + 1
-        if score > highest:
-            highest = score
+    for gold in gold_values:
+        if gold >= 60:
+            target_count = target_count + 1
+        if gold > highest_gold:
+            highest_gold = gold
 
-    return pass_count, highest
+    return target_count, highest_gold
 
-assert summarize_scores([55, 72, 88, 49, 60]) == (3, 88)
-assert summarize_scores([60]) == (1, 60)
-assert summarize_scores([0, 59]) == (0, 59)
+assert summarize_gold([55, 72, 88, 49, 60]) == (3, 88)
+assert summarize_gold([60]) == (1, 60)
+assert summarize_gold([0, 59]) == (0, 59)
 print("測試通過")
 ```
 
@@ -104,19 +109,19 @@ print("測試通過")
 測試通過
 ```
 
-把核心計算放進函式後，可以快速測試一般情況、只有一筆資料和剛好不及格的邊界。提交時再依題目要求保留 `input()` 和 `print()` 部分。
+把核心計算放進函式後，可以快速測試一般情況、只有一筆資料和剛好在門檻以下的邊界。提交時再依題目要求保留 `input()` 和 `print()` 部分。
 
 ## 易錯位
 
-### ❌ 完全沒有使用 n
+### ❌ 忽略題目給的 n
 
 若題目給 `n`，它通常不是裝飾；它說明預期有多少筆資料。
 
-**✅ 修正：** 至少思考 `len(scores) == n` 是否應成立；若題目規定多行輸入，便按規定讀取。
+**✅ 修正：** 按題目規定使用 `range(n)` 讀取資料，或在另一種輸入格式下檢查 `len(values) == n`。
 
-### ❌ 將最高分初始為 0 而題目容許負數
+### ❌ 將最高值初始為 0 而題目容許負數
 
-若分數或數值可以是負數，`highest = 0` 可能產生不存在的答案。
+若數值可以是負數，`highest_gold = 0` 可能產生不存在的答案。
 
 **✅ 修正：** 在保證 List 非空時以第一項作初始值；或另外處理空資料規則。
 
@@ -130,17 +135,17 @@ print("測試通過")
 
 範例通過不代表所有資料通過。
 
-**✅ 修正：** 自己加入只有一項、剛好 60、全不及格、重複最高分等測試。
+**✅ 修正：** 自己加入只有一項、剛好 60、全部未達標、重複最高值等測試。
 
 ## 你來做
 
-### 基礎題：總分和平均分
+### 基礎題：總金幣和平均金幣
 
-改寫題目：輸出總分和平均分。先寫 IPO 筆記，再完成程式。可假設 `n >= 1`。
+改寫題目：輸出總金幣和平均金幣。先寫 IPO 筆記，再完成程式。可假設 `n >= 1`。
 
-### 標準題：收集及格名次
+### 標準題：收集達標回合
 
-第三行輸入 `n` 個名字，找出及格學生的名次（由 1 開始）並用空格輸出。
+輸出所有金幣數不少於 60 的回合編號（由 1 開始），每個編號一行。
 
 ### 挑戰題：設計一題小比賽題
 
@@ -154,8 +159,8 @@ print("測試通過")
 
 ## 離堂前 3 分鐘
 
-1. 本題的 `scores`、`pass_count`、`highest` 分別負責甚麼？
-2. 為甚麼 `scores[0]` 適合用作本題的最高分初始值？
+1. 本題的 `gold_values`、`target_count`、`highest_gold` 分別負責甚麼？
+2. 為甚麼 `gold_values[0]` 適合用作本題的最高值初始值？
 3. 為甚麼提交前要移除額外的 `print()`？
 
 ## 自我檢查

@@ -1,17 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="500" viewBox="0 0 1100 500">
-<rect width="1100" height="500" rx="28" fill="#f8fafc"/>
-<rect x="0" y="0" width="1100" height="92" rx="28" fill="#0f172a"/>
-<text x="50" y="58" font-family="Arial, 'Noto Sans CJK TC', sans-serif" font-size="34" font-weight="700" fill="#ffffff">迴圈解難模式</text>
-<text x="1048" y="56" text-anchor="end" font-family="Arial, sans-serif" font-size="17" fill="#bfdbfe">F4 Python</text>
-<text x="50" y="112" font-family="Arial, 'Noto Sans CJK TC', sans-serif" font-size="17" fill="#64748b">把概念拆成可觀察的資料和程式步驟</text>
-<rect x="40" y="130" width="305" height="300" rx="22" fill="#dbeafe" stroke="#cbd5e1" stroke-width="2"/>
-<circle cx="78" cy="170" r="22" fill="#172554"/>
-<text x="78" y="178" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">01</text>
-<text x="118" y="178" font-size="22" font-weight="700" fill="#0f172a">一串資料</text><text x="68" y="225" font-size="19" fill="#334155">55   72   88   49   60</text><rect x="385" y="130" width="305" height="300" rx="22" fill="#dcfce7" stroke="#cbd5e1" stroke-width="2"/>
-<circle cx="423" cy="170" r="22" fill="#172554"/>
-<text x="423" y="178" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">02</text>
-<text x="463" y="178" font-size="22" font-weight="700" fill="#0f172a">逐項更新</text><text x="413" y="225" font-size="19" fill="#334155">總和：total</text><text x="413" y="259" font-size="19" fill="#334155">數量：count</text><text x="413" y="293" font-size="19" fill="#334155">最佳：highest</text><rect x="730" y="130" width="305" height="300" rx="22" fill="#fef3c7" stroke="#cbd5e1" stroke-width="2"/>
-<circle cx="768" cy="170" r="22" fill="#172554"/>
-<text x="768" y="178" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">03</text>
-<text x="808" y="178" font-size="22" font-weight="700" fill="#0f172a">不同答案</text><text x="758" y="225" font-size="19" fill="#334155">總分</text><text x="758" y="259" font-size="19" fill="#334155">及格人數</text><text x="758" y="293" font-size="19" fill="#334155">最高分</text><text x="758" y="327" font-size="19" fill="#334155">及格清單</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="500" viewBox="0 0 1100 500" role="img" aria-labelledby="title desc">
+  <title id="title">迴圈解難模式</title>
+  <desc id="desc">同一串遊戲金幣可以用迴圈計算總金幣、達標回合數、最高金幣或收集達標金幣紀錄。</desc>
+  <rect width="1100" height="500" rx="28" fill="#f8fafc"/><rect x="0" y="0" width="1100" height="92" rx="28" fill="#0f172a"/>
+  <text x="50" y="58" font-family="Arial,'Noto Sans CJK TC',sans-serif" font-size="34" font-weight="700" fill="#ffffff">迴圈解難模式</text><text x="1048" y="56" text-anchor="end" font-family="Arial,sans-serif" font-size="17" fill="#bfdbfe">F4 Python</text>
+  <text x="50" y="112" font-family="Arial,'Noto Sans CJK TC',sans-serif" font-size="17" fill="#64748b">同一串資料，依照題目需要更新不同答案</text>
+  <rect x="40" y="130" width="305" height="300" rx="22" fill="#dbeafe" stroke="#cbd5e1" stroke-width="2"/><circle cx="78" cy="170" r="22" fill="#172554"/><text x="78" y="178" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">01</text>
+  <text x="118" y="178" font-size="22" font-weight="700" fill="#0f172a">一串金幣</text><text x="68" y="225" font-size="19" fill="#334155">55   72   88   49   60</text><text x="68" y="290" font-size="17" fill="#475569">每次迴圈取出一個金幣數字</text>
+  <rect x="385" y="130" width="305" height="300" rx="22" fill="#dcfce7" stroke="#cbd5e1" stroke-width="2"/><circle cx="423" cy="170" r="22" fill="#172554"/><text x="423" y="178" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">02</text>
+  <text x="463" y="178" font-size="22" font-weight="700" fill="#0f172a">逐項更新</text><text x="413" y="225" font-size="19" fill="#334155">總和：total</text><text x="413" y="259" font-size="19" fill="#334155">數量：count</text><text x="413" y="293" font-size="19" fill="#334155">最佳：highest</text><text x="413" y="327" font-size="19" fill="#334155">收集：selected</text>
+  <rect x="730" y="130" width="305" height="300" rx="22" fill="#fef3c7" stroke="#cbd5e1" stroke-width="2"/><circle cx="768" cy="170" r="22" fill="#172554"/><text x="768" y="178" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">03</text>
+  <text x="808" y="178" font-size="22" font-weight="700" fill="#0f172a">不同答案</text><text x="758" y="225" font-size="19" fill="#334155">總金幣</text><text x="758" y="259" font-size="19" fill="#334155">達標回合數</text><text x="758" y="293" font-size="19" fill="#334155">最高金幣</text><text x="758" y="327" font-size="19" fill="#334155">達標金幣紀錄</text>
 </svg>

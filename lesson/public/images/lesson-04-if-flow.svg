@@ -1,12 +1,36 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
-<title id="title">if：根據條件，選擇不同結果</title><desc id="desc">先檢查條件；條件的結果是 True 或 False，程式會執行相應區塊。</desc>
-<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eefcf8"/><stop offset="1" stop-color="#eef5ff"/></linearGradient><filter id="shadow" x="-15%" y="-20%" width="130%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#0c5c62" flood-opacity=".14"/></filter></defs>
-<rect width="1200" height="620" rx="34" fill="url(#bg)"/><circle cx="92" cy="72" r="140" fill="#b5f1e2" opacity=".44"/><circle cx="1134" cy="572" r="162" fill="#c9e0ff" opacity=".52"/>
-<text x="600" y="70" text-anchor="middle" font-family="'Microsoft JhengHei', 'Noto Sans TC', sans-serif" font-size="40" font-weight="700" fill="#123f43">if：根據條件，選擇不同結果</text>
-<text x="600" y="112" text-anchor="middle" font-family="'Microsoft JhengHei', 'Noto Sans TC', sans-serif" font-size="23" fill="#365c58">Python 先檢查條件，再執行相應的程式區塊。</text>
-<g filter="url(#shadow)"><rect x="405" y="150" width="390" height="178" rx="22" fill="#fffdf8" stroke="#187b71" stroke-width="4"/><rect x="405" y="150" width="390" height="58" rx="20" fill="#187b71"/><text x="600" y="188" text-anchor="middle" font-family="'Microsoft JhengHei', 'Noto Sans TC', sans-serif" font-size="22" font-weight="700" fill="#fff">要檢查的條件</text><text x="600" y="278" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="29" font-weight="700" fill="#187b71">score &gt;= 60</text><text x="600" y="314" text-anchor="middle" font-family="'Microsoft JhengHei', 'Noto Sans TC', sans-serif" font-size="19" fill="#47635d">score = 72 時，結果是 True</text></g>
-<text x="305" y="390" text-anchor="middle" font-family="'Microsoft JhengHei', 'Noto Sans TC', sans-serif" font-size="22" font-weight="700" fill="#187b71">條件結果是 True 時</text><text x="895" y="390" text-anchor="middle" font-family="'Microsoft JhengHei', 'Noto Sans TC', sans-serif" font-size="22" font-weight="700" fill="#d78b1c">條件結果是 False 時</text>
-<g filter="url(#shadow)"><rect x="115" y="416" width="380" height="138" rx="22" fill="#fffdf8" stroke="#187b71" stroke-width="4"/><rect x="115" y="416" width="380" height="54" rx="20" fill="#187b71"/><text x="305" y="451" text-anchor="middle" font-family="'Microsoft JhengHei', 'Noto Sans TC', sans-serif" font-size="22" font-weight="700" fill="#fff">成立</text><text x="305" y="507" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="28" font-weight="700" fill="#187b71">True</text><text x="305" y="537" text-anchor="middle" font-family="'Microsoft JhengHei', 'Noto Sans TC', sans-serif" font-size="19" fill="#47635d">顯示「及格」</text></g>
-<g filter="url(#shadow)"><rect x="705" y="416" width="380" height="138" rx="22" fill="#fffdf8" stroke="#d78b1c" stroke-width="4"/><rect x="705" y="416" width="380" height="54" rx="20" fill="#d78b1c"/><text x="895" y="451" text-anchor="middle" font-family="'Microsoft JhengHei', 'Noto Sans TC', sans-serif" font-size="22" font-weight="700" fill="#fff">不成立</text><text x="895" y="507" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="28" font-weight="700" fill="#d78b1c">False</text><text x="895" y="537" text-anchor="middle" font-family="'Microsoft JhengHei', 'Noto Sans TC', sans-serif" font-size="19" fill="#47635d">顯示「未及格」</text></g>
-<text x="600" y="590" text-anchor="middle" font-family="'Microsoft JhengHei', 'Noto Sans TC', sans-serif" font-size="20" fill="#365c58">兩個結果是並列的分支：一次判斷只會執行其中一邊。</text>
+  <title id="title">if：根據金幣條件，選擇不同結果</title>
+  <desc id="desc">程式檢查金幣是否有 60 枚或以上。True 顯示可以換領，False 顯示金幣還未足夠。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eefcf8"/><stop offset="1" stop-color="#eef5ff"/></linearGradient>
+    <filter id="shadow" x="-15%" y="-20%" width="130%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#0c5c62" flood-opacity=".14"/></filter>
+  </defs>
+  <rect width="1200" height="620" rx="34" fill="url(#bg)"/>
+  <circle cx="92" cy="72" r="140" fill="#b5f1e2" opacity=".44"/><circle cx="1134" cy="572" r="162" fill="#c9e0ff" opacity=".52"/>
+  <text x="600" y="70" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="40" font-weight="700" fill="#123f43">if：根據條件，選擇不同結果</text>
+  <text x="600" y="112" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="23" fill="#365c58">程式先檢查金幣數量，再執行其中一個程式區塊。</text>
+  <g filter="url(#shadow)">
+    <rect x="405" y="150" width="390" height="178" rx="22" fill="#fffdf8" stroke="#187b71" stroke-width="4"/>
+    <rect x="405" y="150" width="390" height="58" rx="20" fill="#187b71"/>
+    <text x="600" y="188" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="22" font-weight="700" fill="#fff">要檢查的條件</text>
+    <text x="600" y="278" text-anchor="middle" font-family="Consolas,'Courier New',monospace" font-size="29" font-weight="700" fill="#187b71">gold &gt;= 60</text>
+    <text x="600" y="314" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="19" fill="#47635d">gold = 72 時，結果是 True</text>
+  </g>
+  <text x="305" y="390" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="22" font-weight="700" fill="#187b71">條件結果是 True 時</text>
+  <text x="895" y="390" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="22" font-weight="700" fill="#d78b1c">條件結果是 False 時</text>
+  <g filter="url(#shadow)">
+    <rect x="115" y="416" width="380" height="138" rx="22" fill="#fffdf8" stroke="#187b71" stroke-width="4"/>
+    <rect x="115" y="416" width="380" height="54" rx="20" fill="#187b71"/>
+    <text x="305" y="451" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="22" font-weight="700" fill="#fff">成立</text>
+    <text x="305" y="507" text-anchor="middle" font-family="Consolas,'Courier New',monospace" font-size="28" font-weight="700" fill="#187b71">True</text>
+    <text x="305" y="537" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="19" fill="#47635d">顯示「可以換領」</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="705" y="416" width="380" height="138" rx="22" fill="#fffdf8" stroke="#d78b1c" stroke-width="4"/>
+    <rect x="705" y="416" width="380" height="54" rx="20" fill="#d78b1c"/>
+    <text x="895" y="451" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="22" font-weight="700" fill="#fff">不成立</text>
+    <text x="895" y="507" text-anchor="middle" font-family="Consolas,'Courier New',monospace" font-size="28" font-weight="700" fill="#d78b1c">False</text>
+    <text x="895" y="537" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="19" fill="#47635d">顯示「金幣還未足夠」</text>
+  </g>
+  <text x="600" y="590" text-anchor="middle" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif" font-size="20" fill="#365c58">兩個結果是並列的分支：一次判斷只會執行其中一邊。</text>
 </svg>

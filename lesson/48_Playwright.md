@@ -30,12 +30,14 @@
 
 ## 跟著做：例子 1——在本機 HTML 頁面讀取標題
 
-第一次使用前，在終端機執行：
+第一次使用前，請按你正在使用的環境安裝 Playwright 和 Chromium 瀏覽器元件：
 
-```text
-pip install playwright
-playwright install
-```
+| 環境 | 安裝方式 |
+| --- | --- |
+| Google Colab 的程式格 | `!pip install playwright`，再執行 `!playwright install chromium` |
+| VS Code 終端機／PowerShell | `pip install playwright`，再執行 `playwright install chromium` |
+
+安裝指令不是 Python 語法；在 Colab 要在前面加上 `!`，在終端機則不要加。第一次安裝 Chromium 瀏覽器元件需要下載較大檔案，可能要等一會；這不代表 Python 程式一定卡住。
 
 ```python
 from playwright.sync_api import sync_playwright

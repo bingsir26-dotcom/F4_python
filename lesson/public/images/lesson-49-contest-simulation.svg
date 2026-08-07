@@ -1,17 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="500" viewBox="0 0 1100 500">
-<rect width="1100" height="500" rx="28" fill="#f8fafc"/>
-<rect x="0" y="0" width="1100" height="92" rx="28" fill="#0f172a"/>
-<text x="50" y="58" font-family="Arial, 'Noto Sans CJK TC', sans-serif" font-size="34" font-weight="700" fill="#ffffff">解難比賽模擬</text>
-<text x="1048" y="56" text-anchor="end" font-family="Arial, sans-serif" font-size="17" fill="#bfdbfe">F4 Python</text>
-<text x="50" y="112" font-family="Arial, 'Noto Sans CJK TC', sans-serif" font-size="17" fill="#64748b">把概念拆成可觀察的資料和程式步驟</text>
-<rect x="40" y="130" width="305" height="300" rx="22" fill="#dbeafe" stroke="#cbd5e1" stroke-width="2"/>
-<circle cx="78" cy="170" r="22" fill="#172554"/>
-<text x="78" y="178" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">01</text>
-<text x="118" y="178" font-size="22" font-weight="700" fill="#0f172a">Input</text><text x="68" y="225" font-size="19" fill="#334155">n = 5</text><text x="68" y="259" font-size="19" fill="#334155">55 72 88 49 60</text><text x="68" y="293" font-size="19" fill="#334155">先確認格式</text><rect x="385" y="130" width="305" height="300" rx="22" fill="#dcfce7" stroke="#cbd5e1" stroke-width="2"/>
-<circle cx="423" cy="170" r="22" fill="#172554"/>
-<text x="423" y="178" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">02</text>
-<text x="463" y="178" font-size="22" font-weight="700" fill="#0f172a">Process</text><text x="413" y="225" font-size="19" fill="#334155">pass_count</text><text x="413" y="259" font-size="19" fill="#334155">highest</text><text x="413" y="293" font-size="19" fill="#334155">for + if</text><rect x="730" y="130" width="305" height="300" rx="22" fill="#fef3c7" stroke="#cbd5e1" stroke-width="2"/>
-<circle cx="768" cy="170" r="22" fill="#172554"/>
-<text x="768" y="178" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">03</text>
-<text x="808" y="178" font-size="22" font-weight="700" fill="#0f172a">Output</text><text x="758" y="225" font-size="19" fill="#334155">3</text><text x="758" y="259" font-size="19" fill="#334155">88</text><text x="758" y="293" font-size="19" fill="#334155">再測邊界資料</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="500" viewBox="0 0 1100 500" role="img" aria-labelledby="title desc">
+  <title id="title">解難比賽模擬：Input、Process、Output</title>
+  <desc id="desc">讀取回合數和每回合金幣，以 target_count 統計達標回合，以 highest_gold 保存最高金幣，最後輸出兩個答案並測試邊界資料。</desc>
+  <rect width="1100" height="500" rx="28" fill="#f8fafc"/><rect x="0" y="0" width="1100" height="92" rx="28" fill="#0f172a"/>
+  <text x="50" y="58" font-family="Arial,'Noto Sans CJK TC',sans-serif" font-size="34" font-weight="700" fill="#ffffff">解難比賽模擬</text><text x="1048" y="56" text-anchor="end" font-family="Arial,sans-serif" font-size="17" fill="#bfdbfe">F4 Python</text>
+  <text x="50" y="112" font-family="Arial,'Noto Sans CJK TC',sans-serif" font-size="17" fill="#64748b">先寫清楚輸入、處理和輸出，再開始寫程式</text>
+  <rect x="40" y="130" width="305" height="300" rx="22" fill="#dbeafe" stroke="#cbd5e1" stroke-width="2"/><circle cx="78" cy="170" r="22" fill="#172554"/><text x="78" y="178" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">01</text>
+  <text x="118" y="178" font-size="22" font-weight="700" fill="#0f172a">Input</text><text x="68" y="225" font-size="19" fill="#334155">n = 5</text><text x="68" y="259" font-size="19" fill="#334155">55 72 88 49 60</text><text x="68" y="293" font-size="19" fill="#334155">n 行金幣輸入</text>
+  <rect x="385" y="130" width="305" height="300" rx="22" fill="#dcfce7" stroke="#cbd5e1" stroke-width="2"/><circle cx="423" cy="170" r="22" fill="#172554"/><text x="423" y="178" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">02</text>
+  <text x="463" y="178" font-size="22" font-weight="700" fill="#0f172a">Process</text><text x="413" y="225" font-size="18" fill="#334155">target_count</text><text x="413" y="259" font-size="18" fill="#334155">highest_gold</text><text x="413" y="293" font-size="19" fill="#334155">for + if</text>
+  <rect x="730" y="130" width="305" height="300" rx="22" fill="#fef3c7" stroke="#cbd5e1" stroke-width="2"/><circle cx="768" cy="170" r="22" fill="#172554"/><text x="768" y="178" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">03</text>
+  <text x="808" y="178" font-size="22" font-weight="700" fill="#0f172a">Output</text><text x="758" y="225" font-size="19" fill="#334155">3</text><text x="758" y="259" font-size="19" fill="#334155">88</text><text x="758" y="293" font-size="19" fill="#334155">再測邊界資料</text>
 </svg>
